@@ -5,7 +5,10 @@ class FIPS:
     def __init__(self, r):
         self.r = r
 
-        assert len(r) == 20000
+        if len(r) < 20000:
+            print(r)
+
+        #assert len(r) == 20000
 
     def single_bits_test(self):
         one_count = self.r.count(1)
@@ -32,29 +35,26 @@ class FIPS:
             if b == 0:
                 # Increment if not counting 1-series
                 if one_ctr == 0:
-                    zero_ctr += 1
+                    if zero_ctr < 7:
+                        zero_ctr += 1
+                elif one_ctr > 1:
+                    results[one_ctr-1][1] += 1
 
                 # Reset 1-series counter
                 one_ctr = 0
             elif b == 1:
                 # Increment if not counting 0-series
                 if zero_ctr == 0:
-                    one_ctr += 1
+                    if one_ctr < 7:
+                        one_ctr += 1
+                elif zero_ctr > 1:
+                    results[zero_ctr-1][0] += 1
 
                 # Reset 0-series counter
                 zero_ctr = 0
 
-            if zero_ctr > 6:
-                zero_ctr = 6
 
-            if one_ctr > 6:
-                one_ctr = 6
-
-            if zero_ctr:
-                results[zero_ctr][0] += 1
-
-            if one_ctr:
-                results[one_ctr][1] += 1
+            print(f'{b}: {zero_ctr} {one_ctr}')
 
         print(results)
 
@@ -94,11 +94,12 @@ def bbs(n, r, a):
     return b
 
 def bbs_preset():
-    p = 431
-    q = 347
+    p = 30000000091
+    q = 40000000003
     n = p*q
     a = pick_random_a(n)
-    r = 20000
+    #r = 20000
+    r = 10
 
     print(f'n: {n}, a: {a}')
 
