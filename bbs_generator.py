@@ -15,7 +15,17 @@ def pick_random_a(n):
     return a
 
 def bbs(n, r, a):
-    x = []
+    x = [pow(a, 2) % n]
+
+    b = []
+
+    for i in range(1, r+1):
+        x_tmp = pow(x[i-1], 2) % n
+        x.append(x_tmp)
+
+        b.append(x_tmp % 2)
+
+    return b
 
 def bbs_preset():
     p = 431
@@ -32,4 +42,4 @@ def bbs_preset():
     return bbs(n, r, a)
 
 if __name__ == '__main__':
-    bbs_preset()
+    print(bbs_preset())
