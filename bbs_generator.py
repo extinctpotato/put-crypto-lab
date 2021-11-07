@@ -1,6 +1,24 @@
 from math import gcd
 from random import randint
 
+class FIPS:
+    def __init__(self, r):
+        self.r = r
+
+        assert len(r) == 20000
+
+    def single_bits_test(self):
+        one_count = self.r.count(1)
+
+        return one_count > 9725 and one_count < 10275
+
+def run_all_tests(r):
+    tests = [str(t) for t in dir(FIPS) if t.endswith("_test")]
+
+    for t in tests:
+        res = eval(f'FIPS({r}).{t}()')
+        print(f'{t}: {res}')
+
 def is_congruent(a, b, n):
     return a%n == b%n
 
@@ -32,7 +50,7 @@ def bbs_preset():
     q = 347
     n = p*q
     a = pick_random_a(n)
-    r = 20
+    r = 20000
 
     print(f'n: {n}, a: {a}')
 
@@ -42,4 +60,7 @@ def bbs_preset():
     return bbs(n, r, a)
 
 if __name__ == '__main__':
-    print(bbs_preset())
+    #print(bbs_preset())
+    r = bbs_preset()
+
+    run_all_tests(r)
