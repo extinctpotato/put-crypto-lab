@@ -12,6 +12,54 @@ class FIPS:
 
         return one_count > 9725 and one_count < 10275
 
+    def series_test(self):
+        constraints = {
+                1: (2315, 2685),
+                2: (1114,1386),
+                3: (527,723),
+                4: (240,384),
+                5: (103,209),
+                6: (103,209)
+                }
+
+        one_ctr = 0
+        zero_ctr = 0
+
+        #     series: 0,1
+        results = {k:[0,0] for k in range(1,7)}
+
+        for b in self.r:
+            if b == 0:
+                # Increment if not counting 1-series
+                if one_ctr == 0:
+                    zero_ctr += 1
+
+                # Reset 1-series counter
+                one_ctr = 0
+            elif b == 1:
+                # Increment if not counting 0-series
+                if zero_ctr == 0:
+                    one_ctr += 1
+
+                # Reset 0-series counter
+                zero_ctr = 0
+
+            if zero_ctr > 6:
+                zero_ctr = 6
+
+            if one_ctr > 6:
+                one_ctr = 6
+
+            if zero_ctr:
+                results[zero_ctr][0] += 1
+
+            if one_ctr:
+                results[one_ctr][1] += 1
+
+        print(results)
+
+        return True
+
 def run_all_tests(r):
     tests = [str(t) for t in dir(FIPS) if t.endswith("_test")]
 
