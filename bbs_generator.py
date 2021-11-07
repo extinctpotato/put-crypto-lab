@@ -33,28 +33,25 @@ class FIPS:
 
         for b in self.r:
             if b == 0:
-                # Increment if not counting 1-series
-                if one_ctr == 0:
-                    if zero_ctr < 7:
-                        zero_ctr += 1
-                elif one_ctr > 1:
+                if one_ctr > 1:
                     results[one_ctr-1][1] += 1
 
                 # Reset 1-series counter
                 one_ctr = 0
+
+                if zero_ctr < 7:
+                    zero_ctr += 1
+
             elif b == 1:
-                # Increment if not counting 0-series
-                if zero_ctr == 0:
-                    if one_ctr < 7:
-                        one_ctr += 1
-                elif zero_ctr > 1:
+                if zero_ctr > 1:
                     results[zero_ctr-1][0] += 1
 
                 # Reset 0-series counter
                 zero_ctr = 0
 
-
-            print(f'{b}: {zero_ctr} {one_ctr}')
+                # Increment if not counting 0-series
+                if one_ctr < 7:
+                    one_ctr += 1
 
         print(results)
 
