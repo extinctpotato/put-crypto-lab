@@ -6,7 +6,7 @@ class FIPS:
         self.r = r
 
         if len(r) < 20000:
-            print(r)
+            print(self.r)
 
         #assert len(r) == 20000
 
@@ -25,35 +25,23 @@ class FIPS:
                 6: (103,209)
                 }
 
-        one_ctr = 0
-        zero_ctr = 0
-
-        #     series: 0,1
-        results = {k:[0,0] for k in range(1,7)}
+        series = [0 for _ in range(0,6)]
+        prev_num = None
+        counter = 0
 
         for b in self.r:
-            if b == 0:
-                if one_ctr > 1:
-                    results[one_ctr-1][1] += 1
+            if b == prev_num or prev_num is None:
+                if counter < 7:
+                    counter += 1
+            else:
+                series[counter-1] += 1
+                counter = 1
 
-                # Reset 1-series counter
-                one_ctr = 0
+            prev_num = b
 
-                if zero_ctr < 7:
-                    zero_ctr += 1
+        series[counter-1] += 1
 
-            elif b == 1:
-                if zero_ctr > 1:
-                    results[zero_ctr-1][0] += 1
-
-                # Reset 0-series counter
-                zero_ctr = 0
-
-                # Increment if not counting 0-series
-                if one_ctr < 7:
-                    one_ctr += 1
-
-        print(results)
+        print(series)
 
         return True
 
