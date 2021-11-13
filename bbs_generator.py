@@ -25,21 +25,23 @@ class FIPS:
                 6: (103,209)
                 }
 
-        series = [0 for _ in range(0,6)]
+        series = [[0 for _ in range(0,6)] for _ in range(0,2)] 
         prev_num = None
-        counter = 0
+        counter = [0,0]
 
         for b in self.r:
             if b == prev_num or prev_num is None:
-                if counter < 7:
-                    counter += 1
+                counter[b] += 1
+                if counter[b] > 6:
+                    counter[b] = 6
+
             else:
-                series[counter-1] += 1
-                counter = 1
+                series[int(not b)][counter[int(not b)]-1] += 1
+                counter[b] = 1
 
             prev_num = b
 
-        series[counter-1] += 1
+        series[prev_num][counter[prev_num]-1] += 1
 
         print(series)
 
@@ -83,8 +85,8 @@ def bbs_preset():
     q = 40000000003
     n = p*q
     a = pick_random_a(n)
-    #r = 20000
-    r = 10
+    r = 20000
+    #r = 10
 
     print(f'n: {n}, a: {a}')
 
@@ -94,7 +96,6 @@ def bbs_preset():
     return bbs(n, r, a)
 
 if __name__ == '__main__':
-    #print(bbs_preset())
     r = bbs_preset()
 
     run_all_tests(r)
