@@ -16,14 +16,14 @@ class FIPS:
         return one_count > 9725 and one_count < 10275
 
     def series_test(self):
-        constraints = {
-                1: (2315, 2685),
-                2: (1114,1386),
-                3: (527,723),
-                4: (240,384),
-                5: (103,209),
-                6: (103,209)
-                }
+        constraints = [
+                (2315, 2685),
+                (1114,1386),
+                (527,723),
+                (240,384),
+                (103,209),
+                (103,209)
+                ]
 
         series = [[0 for _ in range(0,6)] for _ in range(0,2)] 
         prev_num = None
@@ -43,7 +43,10 @@ class FIPS:
 
         series[prev_num][counter[prev_num]-1] += 1
 
-        print(series)
+        for single_series in series:
+            for val, limits in zip(single_series, constraints):
+                if not (limits[0] <= val <= limits[1]):
+                    return False
 
         return True
 
