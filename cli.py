@@ -1,9 +1,39 @@
 import sys, argparse
-from bbs_generator import bbs_preset
+import bbs_generator
 from fips import run_all_tests as run_all_fips_tests
 
 def bbs_preset_func(arg):
-    run_all_fips_tests(bbs_preset())
+    run_all_fips_tests(bbs_generator.bbs_preset())
+
+def make_and_encrypt_func(arg):
+    assert bbs_generator.valid_for_blum(arg.p)
+    assert bbs_generator.valid_for_blum(arg.q)
+
+    with open(arg.input_file, 'r') as f:
+        input_str = f.read()
+
+    n = arg.p*arg.q
+    a = bbs_generator.pick_random_a(n)
+    message = bbs_generator.string_to_bin_list(input_str)
+
+    key = bbs_generator.bbs(n=n, r=len(message), a=a)
+
+    assert len(key) == len(message)
+
+    if arg.input_file != '/dev/stdin':
+        key_file_name = f'{arg.input_file}.bbs_key'
+        ciphered_file_name = f'{arg.input_file}.bbs'
+    else:
+        key_file_name = 'key.bbs_key'
+        ciphered_file_name = '/dev/stdout'
+
+    with open(key_file_name, 'w') as f:
+        f.write("".join(map(str, key)))
+
+    ciphered = bbs_generator.otp(message, key)
+
+    with open(ciphered_file_name, 'w') as f:
+        f.write("".join(map(str, ciphered)))
 
 def get_parser():
     parser = argparse.ArgumentParser()
@@ -11,6 +41,12 @@ def get_parser():
 
     bbs_preset_arg = subparsers.add_parser("bbs_preset")
     bbs_preset_arg.set_defaults(func=bbs_preset_func)
+
+    make_and_encrypt_arg = subparsers.add_parser("make_and_encrypt")
+    make_and_encrypt_arg.add_argument("input_file", type=str)
+    make_and_encrypt_arg.add_argument("--p", type=int, default=bbs_generator.PRESET_P)
+    make_and_encrypt_arg.add_argument("--q", type=int, default=bbs_generator.PRESET_Q)
+    make_and_encrypt_arg.set_defaults(func=make_and_encrypt_func)
 
     return parser
 

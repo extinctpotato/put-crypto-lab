@@ -49,7 +49,7 @@ def bbs_preset():
 def otp(message, key):
     return [int(bool(m) ^ bool(k)) for m, k in zip(message, key)]
 
-def string_otp(message_str, key):
+def string_to_bin_list(message_str):
     bin = lambda i: format(i, 'b')
 
     message = []
@@ -57,4 +57,4 @@ def string_otp(message_str, key):
     for bin_int in map(bin, bytearray(message_str, encoding='utf8')):
         message.extend(list(bin_int))
 
-    return otp(message, key)
+    return message 
