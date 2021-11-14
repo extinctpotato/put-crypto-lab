@@ -1,4 +1,5 @@
 from math import gcd
+from textwrap import wrap
 from random import randint
 
 class FIPS:
@@ -63,6 +64,21 @@ class FIPS:
                 return False
 
         return True
+
+    def poker_test(self):
+        # A list of padded binary numbers.
+        binary_0_to_15 = ["{0:04b}".format(i) for i in range(0,16)]
+
+        # Convert bitlist to a string and divide it to a list
+        # of 4-character strings representing padded binary numbers.
+        chunked = wrap("".join(map(str, self.r)), 4)
+
+        occurences = [chunked.count(b) for b in binary_0_to_15]
+
+        X = (sum([pow(i,2) for i in occurences]) * 16 / 5000) - 5000
+
+        return 2.16 < X < 46.17
+
 
 def run_all_tests(r):
     tests = [str(t) for t in dir(FIPS) if t.endswith("_test")]
