@@ -45,12 +45,12 @@ def decrypt_func(arg):
     with open(arg.key_file, 'r') as f:
         key = list(map(int, list(f.read().strip().replace('\n', ''))))
 
-    output_file = '/dev/stdout'
-
     deciphered = bbs_generator.otp(ciphered, key)
 
+    output_file = '/dev/stdout'
+
     with open(output_file, 'w') as f:
-        f.write("".join(map(str, deciphered)))
+        f.write(bbs_generator.bin_list_to_string(deciphered))
 
 def get_parser():
     parser = argparse.ArgumentParser()
