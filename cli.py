@@ -52,6 +52,14 @@ def decrypt_func(arg):
     with open(output_file, 'w') as f:
         f.write(bbs_generator.bin_list_to_string(deciphered))
 
+def gen_bbs_func(arg):
+    n = arg.p * arg.q
+    a = bbs_generator.pick_random_a(n)
+    r = bbs_generator.bbs(n=n, r=arg.r, a=a)
+
+    with open('/dev/stdout', 'w') as f:
+        f.write("".join(map(str, r)))
+
 def get_parser():
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers()
@@ -69,6 +77,12 @@ def get_parser():
     decrypt_arg.add_argument("ciphered_file", type=str)
     decrypt_arg.add_argument("key_file", type=str)
     decrypt_arg.set_defaults(func=decrypt_func)
+
+    gen_bbs_arg = subparsers.add_parser("gen_bbs")
+    gen_bbs_arg.add_argument("--p", type=int, default=bbs_generator.PRESET_P)
+    gen_bbs_arg.add_argument("--q", type=int, default=bbs_generator.PRESET_Q)
+    gen_bbs_arg.add_argument("--r", type=int, default=1000000)
+    gen_bbs_arg.set_defaults(func=gen_bbs_func)
 
     return parser
 
