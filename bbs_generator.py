@@ -19,8 +19,8 @@ class FIPS:
         for b in bit_array:
             if b == prev_num or prev_num is None:
                 counter[b] += 1
-                if counter[b] > 6:
-                    counter[b] = 6
+                if counter[b] > max_len:
+                    counter[b] = max_len
 
             else:
                 series[int(not b)][counter[int(not b)]-1] += 1
