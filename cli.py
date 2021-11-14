@@ -23,6 +23,9 @@ def make_and_encrypt_func(arg):
     if arg.input_file != '/dev/stdin':
         key_file_name = f'{arg.input_file}.bbs_key'
         ciphered_file_name = f'{arg.input_file}.bbs'
+
+        with open(f'{arg.input_file}.bin_int', 'w') as f:
+            f.write("".join(map(str, message)))
     else:
         key_file_name = 'key.bbs_key'
         ciphered_file_name = '/dev/stdout'
@@ -34,6 +37,20 @@ def make_and_encrypt_func(arg):
 
     with open(ciphered_file_name, 'w') as f:
         f.write("".join(map(str, ciphered)))
+
+def decrypt_func(arg):
+    with open(arg.ciphered_file, 'r') as f:
+        ciphered = list(map(int, list(f.read().strip().replace('\n', ''))))
+
+    with open(arg.key_file, 'r') as f:
+        key = list(map(int, list(f.read().strip().replace('\n', ''))))
+
+    output_file = '/dev/stdout'
+
+    deciphered = bbs_generator.otp(ciphered, key)
+
+    with open(output_file, 'w') as f:
+        f.write("".join(map(str, deciphered)))
 
 def get_parser():
     parser = argparse.ArgumentParser()
@@ -47,6 +64,11 @@ def get_parser():
     make_and_encrypt_arg.add_argument("--p", type=int, default=bbs_generator.PRESET_P)
     make_and_encrypt_arg.add_argument("--q", type=int, default=bbs_generator.PRESET_Q)
     make_and_encrypt_arg.set_defaults(func=make_and_encrypt_func)
+
+    decrypt_arg = subparsers.add_parser("decrypt")
+    decrypt_arg.add_argument("ciphered_file", type=str)
+    decrypt_arg.add_argument("key_file", type=str)
+    decrypt_arg.set_defaults(func=decrypt_func)
 
     return parser
 
