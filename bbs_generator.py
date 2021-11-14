@@ -2,6 +2,9 @@ from random import randint
 from math import gcd
 from fips import FIPS
 
+PRESET_P = 30000000091
+PRESET_Q = 40000000003
+
 def is_congruent(a, b, n):
     return a%n == b%n
 
@@ -29,8 +32,8 @@ def bbs(n, r, a):
     return b
 
 def bbs_preset():
-    p = 30000000091
-    q = 40000000003
+    p = PRESET_P 
+    q = PRESET_Q
     n = p*q
     a = pick_random_a(n)
     r = 20000
