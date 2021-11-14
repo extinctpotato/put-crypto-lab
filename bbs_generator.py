@@ -10,6 +10,27 @@ class FIPS:
 
         #assert len(r) == 20000
 
+    def __count_series(self, bit_array, max_len):
+        series = [[0 for _ in range(0,max_len)] for _ in range(0,2)] 
+        prev_num = None
+        counter = [0,0]
+
+        for b in bit_array:
+            if b == prev_num or prev_num is None:
+                counter[b] += 1
+                if counter[b] > 6:
+                    counter[b] = 6
+
+            else:
+                series[int(not b)][counter[int(not b)]-1] += 1
+                counter[b] = 1
+
+            prev_num = b
+
+        series[prev_num][counter[prev_num]-1] += 1
+
+        return series
+
     def single_bits_test(self):
         one_count = self.r.count(1)
 
@@ -25,28 +46,21 @@ class FIPS:
                 (103,209)
                 ]
 
-        series = [[0 for _ in range(0,6)] for _ in range(0,2)] 
-        prev_num = None
-        counter = [0,0]
-
-        for b in self.r:
-            if b == prev_num or prev_num is None:
-                counter[b] += 1
-                if counter[b] > 6:
-                    counter[b] = 6
-
-            else:
-                series[int(not b)][counter[int(not b)]-1] += 1
-                counter[b] = 1
-
-            prev_num = b
-
-        series[prev_num][counter[prev_num]-1] += 1
+        series = self.__count_series(self.r, 6)
 
         for single_series in series:
             for val, limits in zip(single_series, constraints):
                 if not (limits[0] <= val <= limits[1]):
                     return False
+
+        return True
+
+    def long_series_test(self):
+        series = self.__count_series(self.r, 26)
+
+        for single_series in series:
+            if single_series[25] > 0:
+                return False
 
         return True
 
