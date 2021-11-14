@@ -55,6 +55,6 @@ def string_to_bin_list(message_str):
     message = []
 
     for bin_int in map(bin, bytearray(message_str, encoding='utf8')):
-        message.extend(list(bin_int))
+        message.extend(list(map(int, bin_int)))
 
     return message 
