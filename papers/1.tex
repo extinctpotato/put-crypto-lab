@@ -35,6 +35,8 @@ tak długo, aż otrzymana liczba spełni warunek $GCD(a,n) = 1$.
 
 \section{Cztery testy statystyczne według FIPS 140-2}
 
+\subsection{Szczegóły implementacyjne}
+
 Testy zostały zaimplementowane jako metody klasy, która jako argument inicjalizujący przyjmuje
 tablicę bitów (\textit{list of 0-1 integers}).
 
@@ -46,18 +48,38 @@ tablicę bitów (\textit{list of 0-1 integers}).
 Jako konwencję przyjęto, że nazwy metod prywatnych (nie będące testami) zaczynają się od dwóch znaków podkreślenia,
 a nazwy funkcji testujących kończą się wyrazem \lstinline{_test}.
 
-\subsection{Test pojedynczych bitów}
+\subsubsection{Test pojedynczych bitów}
 
 \begin{listing}[H]
 	\inputminted[firstline=34,lastline=37]{python}{../fips.py}
 	\caption{Metoda klasy}
 \end{listing}
 
-\subsection{Test serii}
+\subsubsection{Test serii}
 
 \begin{listing}[H]
 	\inputminted[firstline=39,lastline=56]{python}{../fips.py}
 	\caption{Metoda klasy}
 \end{listing}
+
+\subsubsection{Test długiej serii}
+
+\begin{listing}[H]
+	\inputminted[firstline=58,lastline=65]{python}{../fips.py}
+	\caption{Metoda klasy}
+\end{listing}
+
+\subsubsection{Test pokerowy}
+
+\begin{listing}[H]
+	\inputminted[firstline=67,lastline=79]{python}{../fips.py}
+	\caption{Metoda klasy}
+\end{listing}
+
+\subsection{Uruchomienie testów na 3 losowych ciągach o długości 200000 bitów}
+
+\inputminted{text}{1-test-1.txt}
+\inputminted{text}{1-test-2.txt}
+\inputminted{text}{1-test-3.txt}
 
 \end{document}
