@@ -3,7 +3,7 @@ import bbs_generator
 from fips import run_all_tests as run_all_fips_tests
 
 def bbs_preset_func(arg):
-    run_all_fips_tests(bbs_generator.bbs_preset())
+    run_all_fips_tests(bbs_generator.bbs_preset(n=arg.n, a=arg.a))
 
 def make_and_encrypt_func(arg):
     assert bbs_generator.valid_for_blum(arg.p)
@@ -65,6 +65,8 @@ def get_parser():
     subparsers = parser.add_subparsers()
 
     bbs_preset_arg = subparsers.add_parser("bbs_preset")
+    bbs_preset_arg.add_argument("--n", type=int, default=None)
+    bbs_preset_arg.add_argument("--a", type=int, default=None)
     bbs_preset_arg.set_defaults(func=bbs_preset_func)
 
     make_and_encrypt_arg = subparsers.add_parser("make_and_encrypt")

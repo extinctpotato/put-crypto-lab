@@ -31,11 +31,11 @@ def bbs(n, r, a):
 
     return b
 
-def bbs_preset():
+def bbs_preset(n=None, a=None):
     p = PRESET_P 
     q = PRESET_Q
-    n = p*q
-    a = pick_random_a(n)
+    n = n or p*q
+    a = a or pick_random_a(n)
     r = 20000
     #r = 10
 
