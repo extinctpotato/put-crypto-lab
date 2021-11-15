@@ -3,19 +3,14 @@
 \usepackage[english,polish]{babel}
 \usepackage[T1]{fontenc}
 \usepackage{minted}
+\usepackage{listings}
 \usepackage{geometry}
-\geometry{left=2cm,right=2cm,top=1cm,bottom=1cm}
 
 \title{Podstawy kryptografi \\ \large Ciągi losowe, szyfrator strumieniowy}
 \author{Adam Olech}
 
 \begin{document}
 \maketitle
-
-\begin{abstract}
-Przedmiotem laboratorium są szyfry strumieniowe, generatory ciągów losowych oraz testowanie losowości.
-Programy zaimplementowano w języku Python bez użycia bibliotek zewnętrznych.
-\end{abstract}
 
 \section{Implementacja generatora ciągów binarnych BBS}
 
@@ -30,12 +25,39 @@ oraz losowo wybraną liczbę naturalną \textit{a}.
 	\caption{Kod generatora}
 \end{listing}
 
-Losowa liczba \textif{n} generowana jest w pętli przy użyciu metody \textit{random.randint}
+Losowa liczba \textit{n} generowana jest w pętli przy użyciu metody \textit{random.randint}
 tak długo, aż otrzymana liczba spełni warunek $GCD(a,n) = 1$.
 
 \begin{listing}[H]
 	\inputminted[firstline=14,lastline=19]{python}{../bbs_generator.py}
 	\caption{Generacja losowej liczby}
+\end{listing}
+
+\section{Cztery testy statystyczne według FIPS 140-2}
+
+Testy zostały zaimplementowane jako metody klasy, która jako argument inicjalizujący przyjmuje
+tablicę bitów (\textit{list of 0-1 integers}).
+
+\begin{listing}[H]
+	\inputminted[firstline=4,lastline=9]{python}{../fips.py}
+	\caption{Klasa FIPS}
+\end{listing}
+
+Jako konwencję przyjęto, że nazwy metod prywatnych (nie będące testami) zaczynają się od dwóch znaków podkreślenia,
+a nazwy funkcji testujących kończą się wyrazem \lstinline{_test}.
+
+\subsection{Test pojedynczych bitów}
+
+\begin{listing}[H]
+	\inputminted[firstline=34,lastline=37]{python}{../fips.py}
+	\caption{Metoda klasy}
+\end{listing}
+
+\subsection{Test serii}
+
+\begin{listing}[H]
+	\inputminted[firstline=39,lastline=56]{python}{../fips.py}
+	\caption{Metoda klasy}
 \end{listing}
 
 \end{document}
