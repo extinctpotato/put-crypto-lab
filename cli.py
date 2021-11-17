@@ -1,9 +1,28 @@
-import sys, argparse
+import sys, argparse, logging
 import bbs_generator
 from fips import run_all_tests as run_all_fips_tests
 
+l = logging.getLogger()
+
 def bbs_preset_func(arg):
     run_all_fips_tests(bbs_generator.bbs_preset(n=arg.n, a=arg.a))
+
+def test_file_func(arg):
+    with open(f'{arg.input_file}', 'r') as f:
+        bin_list = list(map(int, list(f.read().strip().replace('\n', ''))))
+
+    expected_len = 20000
+
+    bin_list = bin_list[:expected_len]
+
+    l.info(f'len: {len(bin_list)}')
+
+    if len(bin_list) != expected_len:
+        l.error(f'A string that will truncate to at least {expected_len} expected')
+        return False
+
+    return run_all_fips_tests(bin_list)
+
 
 def make_and_encrypt_func(arg):
     assert bbs_generator.valid_for_blum(arg.p)
@@ -86,9 +105,16 @@ def get_parser():
     gen_bbs_arg.add_argument("--r", type=int, default=1000000)
     gen_bbs_arg.set_defaults(func=gen_bbs_func)
 
+    test_file_arg = subparsers.add_parser("test_file")
+    test_file_arg.add_argument("input_file", type=str)
+    test_file_arg.set_defaults(func=test_file_func)
+
     return parser
 
 if __name__ == '__main__':
+    logging.basicConfig(format="%(message)s")
+    l.setLevel(logging.INFO)
+
     parser = get_parser()
 
     if (len(sys.argv) == 1):
@@ -96,4 +122,8 @@ if __name__ == '__main__':
         sys.exit(1)
 
     args = parser.parse_args()
-    args.func(args)
+    
+    res = args.func(args)
+
+    if res == False:
+        sys.exit(1)
