@@ -12,6 +12,9 @@
 \begin{document}
 \maketitle
 
+\tableofcontents
+\newpage
+
 \section{Implementacja generatora ciągów binarnych BBS}
 
 Na wejście funkcji generującej losowy ciąg znaków metodą \textbf{Blum-Blum-Shub}
@@ -32,6 +35,8 @@ tak długo, aż otrzymana liczba spełni warunek $GCD(a,n) = 1$.
 	\inputminted[firstline=14,lastline=19]{python}{../bbs_generator.py}
 	\caption{Generacja losowej liczby}
 \end{listing}
+
+\newpage
 
 \section{Cztery testy statystyczne według FIPS 140-2}
 
@@ -82,4 +87,9 @@ a nazwy funkcji testujących kończą się wyrazem \lstinline{_test}.
 \inputminted{text}{1-test-2.txt}
 \inputminted{text}{1-test-3.txt}
 
+\subsection{Własności statystyczne ciągu o długości 1 000 000 bitów wg. pakietu NIST}
+
+\inputminted[fontsize=\footnotesize]{text}{1-1mil-nist.txt}
+
 \end{document}
+
