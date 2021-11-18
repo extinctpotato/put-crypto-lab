@@ -1,0 +1,4 @@
+long_series_test: True
+poker_test: True
+series_test: True
+single_bits_test: True
