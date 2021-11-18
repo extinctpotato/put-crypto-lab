@@ -5,6 +5,7 @@
 \usepackage{minted}
 \usepackage{listings}
 \usepackage{geometry}
+\setlength{\parindent}{0pt}
 
 \title{Podstawy kryptografi \\ \large Ciągi losowe, szyfrator strumieniowy}
 \author{Adam Olech}
@@ -91,5 +92,51 @@ a nazwy funkcji testujących kończą się wyrazem \lstinline{_test}.
 
 \inputminted[fontsize=\footnotesize]{text}{1-1mil-nist.txt}
 
-\end{document}
+\newpage
 
+\section{Szyfrator strumieniowy}
+
+\subsection{Zasada działania}
+
+W programie zaimplementowano szyfrator strumieniowy wykorzystujący generator BBS
+w celu wygenerowania klucza szyfrującego.
+Klucz szyfrujący o długości pliku wejściowego 
+generowany jest dla każdego pliku przed rozpoczęciem przetwarzania.
+
+Istotą działania szyfratora strumieniowego jest operacja logiczna XOR.
+Uzyskanie szyfrogramu polega na obliczeniu logicznej różnicy między ciągiem jawnym a kluczem,
+a odszyfrowanie wiadomości odbywa się przez analogiczną operację na szyfrogramie i kluczu.
+
+\begin{equation}
+	c = m \oplus k 
+\end{equation}
+
+\begin{equation}
+	m = c \oplus k
+\end{equation}
+
+Poniższa funkcja jest implementacją funkcji dokonującej wyżej opisanej operacji
+na tabeli zerojedynkowych liczb całkowitoliczbowych reprezentujących stan logiczny.
+
+\begin{listing}[H]
+	\inputminted[firstline=49,lastline=50]{python}{../bbs_generator.py}
+	\caption{Generacja tablicy licz całkowitoliczbowych}
+\end{listing}
+
+\subsection{Własności statystyczne przykładowego szyfrogramu}
+
+Na potrzeby tego testu zaszyfrowano staroangielski epicki poemat heoriczny \textit{Beowulf}
+pobrany ze strony projektu \textbf{The Project Gutenberg} oraz usunięto z niego znaki
+których nie da się zakodować przy użyciu standardu ASCII.
+
+W wyniku szyfrowania powstały 3 pliki:
+\begin{itemize}
+	\item \textit{beowulf-ascii.txt.bbs} -- szyfrogram w postaci zer i jedynek w ASCII
+	\item \textit{beowulf-ascii.txt.bbs\_key} -- klucz w tej samej postaci jak powyżej 
+	\item \textit{beowulf-ascii.txt.bin\_int} -- wiadomość jawna w tej samej postaci jak powyżej
+\end{itemize}
+
+Szyfrogram przechodzi zaimplementowane testy statystyczne:
+\inputminted{text}{1-test-cipher.txt}
+
+\end{document}
