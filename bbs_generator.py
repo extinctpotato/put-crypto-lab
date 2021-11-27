@@ -39,7 +39,7 @@ def bbs_preset(n=None, a=None):
     r = 20000
     #r = 10
 
-    print(f'n: {n}, a: {a}')
+    #print(f'n: {n}, a: {a}')
 
     assert valid_for_blum(p)
     assert valid_for_blum(q)
