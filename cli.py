@@ -1,8 +1,12 @@
 import sys, argparse, logging
 import bbs_generator
 from fips import run_all_tests as run_all_fips_tests
+from aes import test_lib as aes_test_lib, LOGGER_ID as AES_LOGGER_ID
 
 l = logging.getLogger()
+
+def aes_test_lib_func(arg):
+    aes_test_lib()
 
 def bbs_preset_func(arg):
     run_all_fips_tests(bbs_generator.bbs_preset(n=arg.n, a=arg.a))
@@ -109,11 +113,16 @@ def get_parser():
     test_file_arg.add_argument("input_file", type=str)
     test_file_arg.set_defaults(func=test_file_func)
 
+    aes_test_lib_arg = subparsers.add_parser("aes_test_lib")
+    aes_test_lib_arg.set_defaults(func=aes_test_lib_func)
+
     return parser
 
 if __name__ == '__main__':
     logging.basicConfig(format="%(message)s")
     l.setLevel(logging.INFO)
+
+    logging.getLogger(AES_LOGGER_ID).setLevel(logging.INFO)
 
     parser = get_parser()
 
