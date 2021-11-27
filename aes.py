@@ -1,4 +1,4 @@
-import logging
+import logging, hashlib
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 from bbs_generator import bbs_preset
@@ -29,7 +29,9 @@ def test_lib():
 
                 l.info(f"\t\tobject type: {type(cipher)}")
 
-                padded_data = pad(f.read(), AES.block_size)
+                data = f.read()
+                data_md5 = hashlib.md5(data).hexdigest()
+                padded_data = pad(data, AES.block_size)
 
                 try:
                     encrypted, tag = cipher.encrypt(padded_data), None
@@ -65,3 +67,8 @@ def test_lib():
                     unpadded = unpad(decrypted, AES.block_size)
                 except ValueError:
                     unpadded = decrypted
+
+                decrypted_md5 = hashlib.md5(unpadded).hexdigest()
+
+                l.info(f"\t\tpre-hash:  {data_md5}")
+                l.info(f"\t\tpost-hash: {decrypted_md5}")
