@@ -1,4 +1,4 @@
-import logging, hashlib
+import logging, hashlib, timeit
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 from bbs_generator import bbs_preset
@@ -33,10 +33,14 @@ def test_lib():
                 data_md5 = hashlib.md5(data).hexdigest()
                 padded_data = pad(data, AES.block_size)
 
+                encryption_start = timeit.default_timer()
+
                 try:
                     encrypted, tag = cipher.encrypt(padded_data), None
                 except TypeError:
                     encrypted, tag = cipher.encrypt_and_digest(padded_data)
+
+                encryption_elapsed = timeit.default_timer() - encryption_start
 
                 dec_args = dict()
 
@@ -58,10 +62,14 @@ def test_lib():
                         **dec_args
                         )
 
+                decryption_start = timeit.default_timer()
+
                 if tag is None:
                     decrypted = cipher_dec.decrypt(encrypted)
                 else:
                     decrypted = cipher_dec.decrypt_and_verify(encrypted, tag)
+
+                decryption_elapsed = timeit.default_timer() - decryption_start
 
                 try:
                     unpadded = unpad(decrypted, AES.block_size)
@@ -72,3 +80,8 @@ def test_lib():
 
                 l.info(f"\t\tpre-hash:  {data_md5}")
                 l.info(f"\t\tpost-hash: {decrypted_md5}")
+                l.info(f"\t\tencryption time: {encryption_elapsed}")
+                l.info(f"\t\tdecryption time: {decryption_elapsed}")
+
+                if data_md5 != decrypted_md5:
+                    l.warning("\t\thash mismatch!")
