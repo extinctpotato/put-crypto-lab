@@ -12,6 +12,12 @@ def encrypt_single_block(input, key):
 
     return AES.new(key=key, mode=AES.MODE_ECB).encrypt(input)
 
+def decrypt_single_block(input, key):
+    if len(input) != AES.block_size:
+        raise TypeError(f"input must be at least {AES.block_size} bytes long!")
+
+    return AES.new(key=key, mode=AES.MODE_ECB).decrypt(input)
+
 def chunks(lst, n):
     """Yield successive n-sized chunks from lst."""
     for i in range(0, len(lst), n):
@@ -19,18 +25,6 @@ def chunks(lst, n):
 
 def bytes_xor(a, b):
     return bytes(x ^ y for x, y in zip(a, b))
-
-def aes_cbc(input, key):
-    padded_data = pad(input, AES.block_size)
-
-    b_xor_input = bbs_preset(r=AES.block_size)
-
-    for chunk in chunks(padded_data, AES.block_size):
-        b_xor_input = encrypt_single_block(
-                input=bytes_xor(chunk, b_xor_input),
-                key=key
-                )
-        yield b_xor_input
 
 def gen_bbs_key(r=32):
     return "".join(map(str, bbs_preset(r=32))).encode()
@@ -114,3 +108,32 @@ def test_lib():
 
                 if data_md5 != decrypted_md5:
                     l.warning("\t\thash mismatch!")
+
+class aesCBC:
+    def __init__(self, key=None, iv=None):
+        self.key = key or gen_bbs_key()
+        self.iv = iv or bbs_preset(r=AES.block_size)
+
+    def encrypt(self, input):
+        padded_data = pad(input, AES.block_size)
+        b_xor_input = self.iv 
+
+        for chunk in chunks(padded_data, AES.block_size):
+            b_xor_input = encrypt_single_block(
+                    input=bytes_xor(chunk, b_xor_input),
+                    key=self.key
+                    )
+            yield b_xor_input
+
+    def decrypt(self, input):
+        b_xor_input = self.iv
+
+        for chunk in chunks(input, AES.block_size):
+            yield bytes_xor(
+                    decrypt_single_block(
+                        input=chunk,
+                        key=self.key
+                        ),
+                    b_xor_input
+                    )
+            b_xor_input = chunk
