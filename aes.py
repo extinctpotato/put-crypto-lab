@@ -24,6 +24,7 @@ def chunks(lst, n):
         yield lst[i:i + n]
 
 def bytes_xor(a, b):
+    assert len(a) == len(b)
     return bytes(x ^ y for x, y in zip(a, b))
 
 def gen_bbs_key(r=32):
@@ -137,3 +138,26 @@ class aesCBC:
                     b_xor_input
                     )
             b_xor_input = chunk
+
+class aesOFB:
+    def __init__(self, key=None, iv=None):
+        self.key = key or gen_bbs_key()
+        self.iv = bytes(iv or bbs_preset(r=AES.block_size))
+
+    def encrypt(self, input):
+        if len(input) % AES.block_size == 0:
+            padded_data = input
+        else:
+            padded_data = pad(input, AES.block_size)
+        enc_input = self.iv
+
+        for chunk in chunks(padded_data, AES.block_size):
+            enc_data = encrypt_single_block(
+                    input=enc_input,
+                    key=self.key,
+                    )
+            yield bytes_xor(enc_data, chunk)
+            enc_input = enc_data
+
+    def decrypt(self, input):
+        return self.encrypt(input)

@@ -6,14 +6,15 @@ from fips import run_all_tests as run_all_fips_tests
 from aes import (
         test_lib as aes_test_lib, 
         LOGGER_ID as AES_LOGGER_ID,
-        aesCBC
+        aesCBC,
+        aesOFB,
         )
 
 l = logging.getLogger()
 
-def aes_cbc_enc_test_func(arg):
+def __aes_X_enc_test_func(aes_impl, arg):
     plaintext = arg.plaintext.encode()
-    a = aesCBC()
+    a = aes_impl()
 
     # Join yielded blocks into 'bytes'.
     ciphertext = b"".join(
@@ -30,6 +31,12 @@ def aes_cbc_enc_test_func(arg):
             )
 
     l.info(plaintext_restored.decode())
+
+def aes_cbc_enc_test_func(arg):
+    __aes_X_enc_test_func(aesCBC, arg)
+
+def aes_ofb_enc_test_func(arg):
+    __aes_X_enc_test_func(aesOFB, arg)
 
 def aes_test_lib_func(arg):
     aes_test_lib()
@@ -52,7 +59,6 @@ def test_file_func(arg):
         return False
 
     return run_all_fips_tests(bin_list)
-
 
 def make_and_encrypt_func(arg):
     assert bbs_generator.valid_for_blum(arg.p)
@@ -145,6 +151,10 @@ def get_parser():
     aes_cbc_enc_test_arg = subparsers.add_parser("aes_cbc_enc_test")
     aes_cbc_enc_test_arg.add_argument("--plaintext", type=str, default="very cool str")
     aes_cbc_enc_test_arg.set_defaults(func=aes_cbc_enc_test_func)
+
+    aes_cbc_enc_test_arg = subparsers.add_parser("aes_ofb_enc_test")
+    aes_cbc_enc_test_arg.add_argument("--plaintext", type=str, default="very cool str")
+    aes_cbc_enc_test_arg.set_defaults(func=aes_ofb_enc_test_func)
 
     return parser
 
