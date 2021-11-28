@@ -6,8 +6,37 @@ from bbs_generator import bbs_preset
 LOGGER_ID = 'aes_logger'
 l = logging.getLogger(LOGGER_ID)
 
+def encrypt_single_block(input, key):
+    if len(input) != AES.block_size:
+        raise TypeError(f"input must be at least {AES.block_size} bytes long!")
+
+    return AES.new(key=key, mode=AES.MODE_ECB).encrypt(input)
+
+def chunks(lst, n):
+    """Yield successive n-sized chunks from lst."""
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
+
+def bytes_xor(a, b):
+    return bytes(x ^ y for x, y in zip(a, b))
+
+def aes_cbc(input, key):
+    padded_data = pad(input, AES.block_size)
+
+    b_xor_input = bbs_preset(r=AES.block_size)
+
+    for chunk in chunks(padded_data, AES.block_size):
+        b_xor_input = encrypt_single_block(
+                input=bytes_xor(chunk, b_xor_input),
+                key=key
+                )
+        yield b_xor_input
+
+def gen_bbs_key(r=32):
+    return "".join(map(str, bbs_preset(r=32))).encode()
+
 def test_lib():
-    key = "".join(map(str, bbs_preset(r=32))).encode()
+    key = gen_bbs_key() 
     modes = [m for m in dir(AES) if m.startswith('MODE_')]
     test_files = ['1m', '10m', '100m']
 
