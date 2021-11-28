@@ -1,9 +1,35 @@
 import sys, argparse, logging
+from Crypto.Util.Padding import unpad
+from Crypto.Cipher import AES
 import bbs_generator
 from fips import run_all_tests as run_all_fips_tests
-from aes import test_lib as aes_test_lib, LOGGER_ID as AES_LOGGER_ID
+from aes import (
+        test_lib as aes_test_lib, 
+        LOGGER_ID as AES_LOGGER_ID,
+        aesCBC
+        )
 
 l = logging.getLogger()
+
+def aes_cbc_enc_test_func(arg):
+    plaintext = arg.plaintext.encode()
+    a = aesCBC()
+
+    # Join yielded blocks into 'bytes'.
+    ciphertext = b"".join(
+            list(a.encrypt(plaintext))
+            )
+
+    # Decrypt ciphertext and unpad it according to
+    # AES block size.
+    plaintext_restored = unpad(
+            b"".join(
+                list(a.decrypt(ciphertext))
+                ),
+            AES.block_size
+            )
+
+    l.info(plaintext_restored.decode())
 
 def aes_test_lib_func(arg):
     aes_test_lib()
@@ -115,6 +141,10 @@ def get_parser():
 
     aes_test_lib_arg = subparsers.add_parser("aes_test_lib")
     aes_test_lib_arg.set_defaults(func=aes_test_lib_func)
+
+    aes_cbc_enc_test_arg = subparsers.add_parser("aes_cbc_enc_test")
+    aes_cbc_enc_test_arg.add_argument("--plaintext", type=str, default="very cool str")
+    aes_cbc_enc_test_arg.set_defaults(func=aes_cbc_enc_test_func)
 
     return parser
 
