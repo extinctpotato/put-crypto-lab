@@ -6,6 +6,7 @@ from fips import run_all_tests as run_all_fips_tests
 from aes import (
         test_lib as aes_test_lib, 
         LOGGER_ID as AES_LOGGER_ID,
+        aesECB,
         aesCBC,
         aesOFB,
         )
@@ -31,6 +32,9 @@ def __aes_X_enc_test_func(aes_impl, arg):
             )
 
     l.info(plaintext_restored.decode())
+
+def aes_ecb_enc_test_func(arg):
+    __aes_X_enc_test_func(aesECB, arg)
 
 def aes_cbc_enc_test_func(arg):
     __aes_X_enc_test_func(aesCBC, arg)
@@ -147,6 +151,10 @@ def get_parser():
 
     aes_test_lib_arg = subparsers.add_parser("aes_test_lib")
     aes_test_lib_arg.set_defaults(func=aes_test_lib_func)
+
+    aes_ecb_enc_test_arg = subparsers.add_parser("aes_ecb_enc_test")
+    aes_ecb_enc_test_arg.add_argument("--plaintext", type=str, default="very cool str")
+    aes_ecb_enc_test_arg.set_defaults(func=aes_ecb_enc_test_func)
 
     aes_cbc_enc_test_arg = subparsers.add_parser("aes_cbc_enc_test")
     aes_cbc_enc_test_arg.add_argument("--plaintext", type=str, default="very cool str")

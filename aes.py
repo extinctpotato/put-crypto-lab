@@ -110,6 +110,28 @@ def test_lib():
                 if data_md5 != decrypted_md5:
                     l.warning("\t\thash mismatch!")
 
+class aesECB:
+    def __init__(self, key=None, iv=None):
+        self.key = key or gen_bbs_key()
+        # ECB doesn't have the concept of initialization vector.
+        self.iv = None
+
+    def encrypt(self, input):
+        padded_data = pad(input, AES.block_size)
+
+        for chunk in chunks(padded_data, AES.block_size):
+            yield encrypt_single_block(
+                    input=chunk,
+                    key=self.key
+                    )
+
+    def decrypt(self, input):
+        for chunk in chunks(input, AES.block_size):
+            yield decrypt_single_block(
+                    input=chunk,
+                    key=self.key
+                    )
+
 class aesCBC:
     def __init__(self, key=None, iv=None):
         self.key = key or gen_bbs_key()
