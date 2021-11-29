@@ -1,7 +1,28 @@
+import logging
 from Crypto.Util.Padding import pad, unpad
+from Crypto.Cipher import AES
 from random import randint
+from string import ascii_lowercase
 # In-tree modules
 from aes import aesECB, aesCBC, aesOFB, chunks
+
+LOGGER_ID = 'aes_tests'
+l = logging.getLogger(LOGGER_ID)
+
+ARISTOTLE_QUOTE = """\
+We should venture on the study of every kind of animal without distaste; \
+for each and all will reveal to us something natural and something beautiful.
+"""
+
+def run_all_tests():
+    inputs = [
+            "a"*AES.block_size*3, 
+            ascii_lowercase * 3,
+            ARISTOTLE_QUOTE
+            ]
+
+    for input in inputs:
+        l.info(input)
 
 class AESMangleTests:
     def __init__(self, input, mode=None):

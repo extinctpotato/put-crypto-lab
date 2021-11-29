@@ -10,6 +10,7 @@ from aes import (
         aesCBC,
         aesOFB,
         )
+from aes_tests import run_all_tests as run_all_aes_mangle_tests
 
 l = logging.getLogger()
 
@@ -163,6 +164,9 @@ def get_parser():
     aes_cbc_enc_test_arg = subparsers.add_parser("aes_ofb_enc_test")
     aes_cbc_enc_test_arg.add_argument("--plaintext", type=str, default="very cool str")
     aes_cbc_enc_test_arg.set_defaults(func=aes_ofb_enc_test_func)
+
+    aes_mangle_tests_arg = subparsers.add_parser("aes_mangle_tests")
+    aes_mangle_tests_arg.set_defaults(func=lambda _: run_all_aes_mangle_tests())
 
     return parser
 
