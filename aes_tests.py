@@ -82,4 +82,38 @@ class AESMangleTests:
             else:
                 yield chunk
 
+    def duplicate_block_test(self):
+        to_repeat = None
 
+        for idx, chunk in enumerate(chunks(self.input, AES.block_size), 1):
+            if to_repeat is not None:
+                yield to_repeat
+                to_repeat = None
+
+            if idx == self.random_block:
+                to_repeat = chunk
+
+            yield chunk
+
+    def duplicate_block_append_test(self):
+        to_repeat = None
+
+        for idx, chunk in enumerate(chunks(self.input, AES.block_size), 1):
+            if idx == self.random_block:
+                to_repeat = chunk
+            yield chunk
+        yield to_repeat
+
+    def duplicate_block_replace_test(self):
+        to_repeat = None
+
+        for idx, chunk in enumerate(chunks(self.input, AES.block_size), 1):
+            if to_repeat is not None:
+                yield to_repeat
+                to_repeat = None
+                continue
+
+            if idx == self.random_block:
+                to_repeat = chunk
+
+            yield chunk
