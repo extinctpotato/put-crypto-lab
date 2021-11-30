@@ -41,6 +41,11 @@ def run_all_tests(aes_impl=aesECB):
         # Initialize mangler with ciphertext in bytes.
         aes_mangle_tests = AESMangleTests(ciphertext)
 
+        l.info("\t\t{}/{}".format(
+            aes_mangle_tests.random_block,
+            aes_mangle_tests.blocks_count)
+            )
+
         for t in tests:
             l.info(f"\t{t}")
 
@@ -63,20 +68,18 @@ class AESMangleTests:
     def __init__(self, input):
         self.input = input
 
-    def remove_block_test(self):
         # Floor division, because we assume that input arrives padded.
-        blocks = len(self.input) // AES.block_size
-        if not blocks > 1:
+        self.blocks_count = len(self.input) // AES.block_size
+        if not self.blocks_count > 1:
             raise TypeError("input must be at least 2 blocks long!")
+        self.random_block = randint(1, self.blocks_count)
 
-        block_to_skip = randint(1, blocks)
-
-        l.info(f"\t\t{block_to_skip}/{blocks}")
-
+    def remove_block_test(self):
         # Iterate over chunks with index, starting with index 1
         for idx, chunk in enumerate(chunks(self.input, AES.block_size), 1):
-            if idx == block_to_skip:
+            if idx == self.random_block:
                 continue
             else:
                 yield chunk
+
 
