@@ -15,6 +15,8 @@ for each and all will reveal to us something natural and something beautiful.
 """
 
 def run_all_tests(aes_impl=aesECB):
+    l.info(f'AES implementation: {str(aes_impl)}')
+
     inputs = [
             "a"*AES.block_size*3, 
             ascii_lowercase * 3,

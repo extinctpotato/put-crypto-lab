@@ -1,7 +1,8 @@
 import sys, argparse, logging
 from Crypto.Util.Padding import unpad
 from Crypto.Cipher import AES
-import bbs_generator
+# In-tree modules
+import aes, bbs_generator
 from fips import run_all_tests as run_all_fips_tests
 from aes import (
         test_lib as aes_test_lib, 
@@ -166,7 +167,10 @@ def get_parser():
     aes_cbc_enc_test_arg.set_defaults(func=aes_ofb_enc_test_func)
 
     aes_mangle_tests_arg = subparsers.add_parser("aes_mangle_tests")
-    aes_mangle_tests_arg.set_defaults(func=lambda _: run_all_aes_mangle_tests())
+    aes_mangle_tests_arg.add_argument("--mode", type=str, default="aesCBC")
+    aes_mangle_tests_arg.set_defaults(
+            func=lambda arg: run_all_aes_mangle_tests(getattr(aes, arg.mode))
+            )
 
     return parser
 
