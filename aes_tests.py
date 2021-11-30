@@ -117,3 +117,16 @@ class AESMangleTests:
                 to_repeat = chunk
 
             yield chunk
+
+    def swap_block_test(self):
+        deferred_chunk = None
+
+        for idx, chunk in enumerate(chunks(self.input, AES.block_size), 1):
+            if idx == self.random_block:
+                deferred_chunk = chunk
+                continue
+            yield chunk
+
+            if deferred_chunk is not None:
+                yield deferred_chunk
+                deferred_chunk = None
