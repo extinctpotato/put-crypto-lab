@@ -1,7 +1,7 @@
 import logging
 from Crypto.Util.Padding import pad, unpad
 from Crypto.Cipher import AES
-from random import randint
+from random import randint, shuffle
 from string import ascii_lowercase
 # In-tree modules
 from aes import aesECB, aesCBC, aesOFB, chunks
@@ -56,9 +56,13 @@ def run_all_tests(aes_impl=aesECB):
                     list(method_to_call())
                     )
 
-            decrypted_mangled_ciphertext = b"".join(
-                    list(aes_obj.decrypt(mangled_ciphertext))
-                    )
+            try:
+                decrypted_mangled_ciphertext = b"".join(
+                        list(aes_obj.decrypt(mangled_ciphertext))
+                        )
+            except TypeError as e:
+                l.info(f"\t\texception: {e}")
+                continue
 
             l.info(f"\t\tmangled:  {mangled_ciphertext}")
             l.info(f"\t\tplaintxt: {input_bytes}")
@@ -138,5 +142,23 @@ class AESMangleTests:
                 mutable_chunk = bytearray(chunk)
                 mutable_chunk[self.random_byte] = randint(0, 256)
                 yield bytes(mutable_chunk)
+            else:
+                yield chunk
+
+    def shuffle_bytes_test(self):
+        for idx, chunk in enumerate(chunks(self.input, AES.block_size), 1):
+            if idx == self.random_block:
+                shuffled_block = bytearray(chunk)
+                shuffle(shuffled_block)
+                yield bytes(shuffled_block)
+            else:
+                yield chunk
+
+    def incomplete_block_test(self):
+        for idx, chunk in enumerate(chunks(self.input, AES.block_size), 1):
+            if idx == self.random_block:
+                incomplete_block = bytearray(chunk)
+                del incomplete_block[self.random_byte]
+                yield bytes(incomplete_block)
             else:
                 yield chunk
