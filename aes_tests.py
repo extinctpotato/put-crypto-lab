@@ -73,6 +73,7 @@ class AESMangleTests:
         if not self.blocks_count > 1:
             raise TypeError("input must be at least 2 blocks long!")
         self.random_block = randint(1, self.blocks_count)
+        self.random_byte = randint(0, AES.block_size-1)
 
     def remove_block_test(self):
         # Iterate over chunks with index, starting with index 1
@@ -130,3 +131,12 @@ class AESMangleTests:
             if deferred_chunk is not None:
                 yield deferred_chunk
                 deferred_chunk = None
+
+    def change_random_byte_test(self):
+        for idx, chunk in enumerate(chunks(self.input, AES.block_size), 1):
+            if idx == self.random_block:
+                mutable_chunk = bytearray(chunk)
+                mutable_chunk[self.random_byte] = randint(0, 256)
+                yield bytes(mutable_chunk)
+            else:
+                yield chunk
