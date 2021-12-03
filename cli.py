@@ -12,6 +12,7 @@ from aes import (
         aesOFB,
         )
 from aes_tests import run_all_tests as run_all_aes_mangle_tests
+from rsa import generate_rsa_keypair
 
 l = logging.getLogger()
 
@@ -170,6 +171,11 @@ def get_parser():
     aes_mangle_tests_arg.add_argument("--mode", type=str, default="aesCBC")
     aes_mangle_tests_arg.set_defaults(
             func=lambda arg: run_all_aes_mangle_tests(getattr(aes, arg.mode))
+            )
+
+    generate_rsa_keypair_arg = subparsers.add_parser("generate_rsa_keypair")
+    generate_rsa_keypair_arg.set_defaults(
+            func=lambda arg: l.info(generate_rsa_keypair())
             )
 
     return parser
