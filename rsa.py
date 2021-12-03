@@ -2,6 +2,10 @@ from sympy import randprime
 # In-tree imports
 from bbs_generator import is_congruent
 
+def modular_multiplicative_inverse(a, m):
+    _, t2, _ = xea(a, m)
+    return t2 % m
+
 def xea(a, b, s1=1, s2=0, t1=0, t2=1):
     q = a // b
     r = a % b
