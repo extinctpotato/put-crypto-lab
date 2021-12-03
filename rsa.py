@@ -41,3 +41,10 @@ def generate_rsa_keypair():
 
     while gcd((e := randprime(0, totient)), totient) != 1:
         pass
+
+    d = modular_multiplicative_inverse(
+            a=e, 
+            m=totient
+            )
+
+    return e, d, n
