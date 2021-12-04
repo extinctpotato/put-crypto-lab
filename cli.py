@@ -11,7 +11,10 @@ from aes import (
         aesCBC,
         aesOFB,
         )
-from aes_tests import run_all_tests as run_all_aes_mangle_tests
+from aes_tests import (
+        ARISTOTLE_QUOTE as QUOTE, 
+        run_all_tests as run_all_aes_mangle_tests
+        )
 from rsa import generate_rsa_keypair, rsa_encrypt_str, rsa_decrypt_str
 
 l = logging.getLogger()
@@ -164,19 +167,19 @@ def get_parser():
     aes_test_lib_arg.set_defaults(func=aes_test_lib_func)
 
     aes_ecb_enc_test_arg = subparsers.add_parser("aes_ecb_enc_test")
-    aes_ecb_enc_test_arg.add_argument("--plaintext", type=str, default="very cool str")
+    aes_ecb_enc_test_arg.add_argument("--plaintext", type=str, default=QUOTE)
     aes_ecb_enc_test_arg.set_defaults(func=aes_ecb_enc_test_func)
 
     aes_cbc_enc_test_arg = subparsers.add_parser("aes_cbc_enc_test")
-    aes_cbc_enc_test_arg.add_argument("--plaintext", type=str, default="very cool str")
+    aes_cbc_enc_test_arg.add_argument("--plaintext", type=str, default=QUOTE)
     aes_cbc_enc_test_arg.set_defaults(func=aes_cbc_enc_test_func)
 
     aes_cbc_enc_test_arg = subparsers.add_parser("aes_ofb_enc_test")
-    aes_cbc_enc_test_arg.add_argument("--plaintext", type=str, default="very cool str")
+    aes_cbc_enc_test_arg.add_argument("--plaintext", type=str, default=QUOTE)
     aes_cbc_enc_test_arg.set_defaults(func=aes_ofb_enc_test_func)
 
     rsa_enc_test_arg = subparsers.add_parser("rsa_enc_test")
-    rsa_enc_test_arg.add_argument("--plaintext", type=str, default="very cool str")
+    rsa_enc_test_arg.add_argument("--plaintext", type=str, default=QUOTE[:50])
     rsa_enc_test_arg.set_defaults(func=rsa_enc_test_func)
 
     aes_mangle_tests_arg = subparsers.add_parser("aes_mangle_tests")
