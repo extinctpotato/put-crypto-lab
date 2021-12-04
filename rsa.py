@@ -2,6 +2,8 @@ from sympy import randprime
 # In-tree imports
 from bbs_generator import is_congruent
 
+ENDIANNESS = 'little'
+
 def int_to_base(n, b):
     if n == 0:
         return [0]
@@ -75,3 +77,18 @@ def rsa_encrypt(msg, e, n):
 
 def rsa_decrypt(ciphertext, d, n):
     return pow(ciphertext, d) % n
+
+def rsa_encrypt_str(msg, e, n):
+    msg_split = int_to_base(
+            n=int.from_bytes(bytes(msg)),
+            b=n
+            )
+
+    for msg_chunk in msg_split:
+        yield rsa_encrypt(msg_chunk, e, n)
+
+def rsa_decrypt_str(ciphertext, e, n):
+    msg_decrypted_chunks = []
+
+    for ciphertext_chunk in ciphertext:
+        pass
