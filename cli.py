@@ -12,7 +12,7 @@ from aes import (
         aesOFB,
         )
 from aes_tests import run_all_tests as run_all_aes_mangle_tests
-from rsa import generate_rsa_keypair
+from rsa import generate_rsa_keypair, rsa_encrypt_str, rsa_decrypt_str
 
 l = logging.getLogger()
 
@@ -47,6 +47,14 @@ def aes_ofb_enc_test_func(arg):
 
 def aes_test_lib_func(arg):
     aes_test_lib()
+
+def rsa_enc_test_func(arg):
+    e, d, n = generate_rsa_keypair()
+    encrypted = rsa_encrypt_str(arg.plaintext, e, n)
+    decrypted = rsa_decrypt_str(encrypted, len(arg.plaintext), d, n)
+
+    l.info(f'e: {e}, d: {d}, n: {n}')
+    l.info(decrypted)
 
 def bbs_preset_func(arg):
     run_all_fips_tests(bbs_generator.bbs_preset(n=arg.n, a=arg.a))
@@ -166,6 +174,10 @@ def get_parser():
     aes_cbc_enc_test_arg = subparsers.add_parser("aes_ofb_enc_test")
     aes_cbc_enc_test_arg.add_argument("--plaintext", type=str, default="very cool str")
     aes_cbc_enc_test_arg.set_defaults(func=aes_ofb_enc_test_func)
+
+    rsa_enc_test_arg = subparsers.add_parser("rsa_enc_test")
+    rsa_enc_test_arg.add_argument("--plaintext", type=str, default="very cool str")
+    rsa_enc_test_arg.set_defaults(func=rsa_enc_test_func)
 
     aes_mangle_tests_arg = subparsers.add_parser("aes_mangle_tests")
     aes_mangle_tests_arg.add_argument("--mode", type=str, default="aesCBC")

@@ -80,15 +80,21 @@ def rsa_decrypt(ciphertext, d, n):
 
 def rsa_encrypt_str(msg, e, n):
     msg_split = int_to_base(
-            n=int.from_bytes(bytes(msg)),
+            n=int.from_bytes(msg.encode(), ENDIANNESS),
             b=n
             )
 
     for msg_chunk in msg_split:
         yield rsa_encrypt(msg_chunk, e, n)
 
-def rsa_decrypt_str(ciphertext, e, n):
+def rsa_decrypt_str(ciphertext, msg_len, d, n):
     msg_decrypted_chunks = []
 
     for ciphertext_chunk in ciphertext:
-        pass
+        msg_decrypted_chunks.append(
+                rsa_decrypt(ciphertext_chunk, d, n)
+                )
+
+    msg_to_base10 = base_to_int(msg_decrypted_chunks, n)
+
+    return int.to_bytes(msg_to_base10, msg_len, ENDIANNESS).decode()
