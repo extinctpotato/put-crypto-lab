@@ -59,6 +59,63 @@ def rsa_enc_test_func(arg):
     l.info(f'e: {e}, d: {d}, n: {n}')
     l.info(decrypted)
 
+def rsa_sign_test_func(arg):
+    # Tuple elements are (e, d, n)
+    #                    [0][1][2]
+    keypair_a = generate_rsa_keypair()
+    keypair_b = generate_rsa_keypair()
+
+    l.info(f'keypair A: {keypair_a}')
+    l.info(f'keypair B: {keypair_b}')
+
+    # To sign a message, is to encrypt it 
+    # using the private part instead of the public part.
+    signed_with_a = rsa_encrypt_str(
+            msg=arg.plaintext, 
+            e=keypair_a[1],
+            n=keypair_a[2],
+            )
+    signed_with_b = rsa_encrypt_str(
+            msg=arg.plaintext,
+            e=keypair_b[1],
+            n=keypair_b[2],
+            )
+
+    # Just as in the previous case,
+    # decryption is reversed as well,
+    # so we decrypt using the public part.
+    decrypted_a = rsa_decrypt_str(
+            ciphertext=signed_with_a,
+            msg_len=len(arg.plaintext),
+            d=keypair_a[0],
+            n=keypair_a[2],
+            )
+    decrypted_b = rsa_decrypt_str(
+            ciphertext=signed_with_b,
+            msg_len=len(arg.plaintext),
+            d=keypair_b[0],
+            n=keypair_b[2],
+            )
+
+    # Let's see what happens if we try to decrypt with a wrong key.
+    decrypted_a_with_b = rsa_decrypt_str(
+            ciphertext=signed_with_a,
+            msg_len=len(arg.plaintext),
+            d=keypair_b[0],
+            n=keypair_b[2],
+            )
+    decrypted_b_with_a = rsa_decrypt_str(
+            ciphertext=signed_with_b,
+            msg_len=len(arg.plaintext),
+            d=keypair_a[0],
+            n=keypair_a[2],
+            )
+
+    l.info(f'A: {decrypted_a}')
+    l.info(f'B: {decrypted_b}')
+    l.info(f'A (with public B): {decrypted_a_with_b}')
+    l.info(f'B (with public A): {decrypted_b_with_a}')
+
 def bbs_preset_func(arg):
     run_all_fips_tests(bbs_generator.bbs_preset(n=arg.n, a=arg.a))
 
@@ -181,6 +238,10 @@ def get_parser():
     rsa_enc_test_arg = subparsers.add_parser("rsa_enc_test")
     rsa_enc_test_arg.add_argument("--plaintext", type=str, default=QUOTE[:50])
     rsa_enc_test_arg.set_defaults(func=rsa_enc_test_func)
+
+    rsa_sign_test_arg = subparsers.add_parser("rsa_sign_test")
+    rsa_sign_test_arg.add_argument("--plaintext", type=str, default=QUOTE[:20])
+    rsa_sign_test_arg.set_defaults(func=rsa_sign_test_func)
 
     aes_mangle_tests_arg = subparsers.add_parser("aes_mangle_tests")
     aes_mangle_tests_arg.add_argument("--mode", type=str, default="aesCBC")
