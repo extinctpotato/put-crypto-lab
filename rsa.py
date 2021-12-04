@@ -2,6 +2,27 @@ from sympy import randprime
 # In-tree imports
 from bbs_generator import is_congruent
 
+def int_to_base(n, b):
+    if n == 0:
+        return [0]
+
+    digits = []
+
+    while n:
+        digits.append(int(n % b))
+        n //= b
+
+    return digits[::-1]
+
+def base_to_int(n, b):
+    r = range(0, len(n))
+    i = 0
+
+    for n_idx, b_idx in zip(r, reversed(r)):
+        i += n[n_idx] * pow(b, b_idx)
+
+    return i
+
 def modular_multiplicative_inverse(a, m):
     _, t2, _ = xea(a, m)
     return t2 % m
@@ -48,3 +69,9 @@ def generate_rsa_keypair():
             )
 
     return e, d, n
+
+def rsa_encrypt(msg, e, n):
+    return pow(msg, e) % n
+
+def rsa_decrypt(ciphertext, d, n):
+    return pow(ciphertext, d) % n
