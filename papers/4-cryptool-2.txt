@@ -1,0 +1,35 @@
+At first, Alice and Bob agreed on the public parameters. So they chose a prime p and a generator g:
+
+p: 170141183460469231731687303715884105727
+
+g: 48124088503943262423679825787553229562
+
+Alice chose her secret number 'a' while Bob chose his secret number 'b':
+
+a: 65963387705922719929071035848729932502
+
+b: 83098014163721153996622330633805783168
+
+If the chosen secret values a and b are greater or equal the prime module p, then they need to be reduced modulo p. The actual values are given below:
+
+a (reduced mod p):
+65963387705922719929071035848729932502
+
+b (reduced mod p):
+83098014163721153996622330633805783168
+
+On the basis of the previously chosen secret numbers, Alice and Bob created their respective shared keys. Alice computed her shared key A, while Bob computed his shared key B:
+
+A: 87218297489510432062481913308967573137
+
+B: 117973712343709287588135853382854744351
+
+In order to calculate their secret and common Session Key, Alice and Bob exchanged their shared keys: Alice sent her shared key A to Bob and Bob sent his shared key B to Alice.
+
+Alice and Bob were able to calculate the secret and common Session Key now. Alice computed the Session Key SA, Bob computed the Session Key SB:
+
+SA: 128394377809002172373349938856329444803
+
+SB: 128394377809002172373349938856329444803
+
+Theoretically it is now possible for Alice and Bob to use their Session Keys to encrypt documents they would like to exchange covertly.
