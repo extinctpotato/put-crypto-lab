@@ -26,22 +26,37 @@
 W tym przegiegu użyto małej liczby pierwszej 47 oraz liczby generatora 29.
 
 \begin{center}
-	\includegraphics[scale=0.4]{4-cryptool-1}
+	\includegraphics[scale=0.3]{4-cryptool-1}
 \end{center}
 
 Alice wybrała swoją utajnioną liczbę $a$ o wartości $16$.
 Bob natomiast ustalił analogicznie liczbę $b$ o wartości $31$.
 
-Jeśli któraś z liczb $a$ i $b$ byłaby większa lub równa od modułu $p$, to należałoby je zredukować.
-W tym przypadku nie było to konieczne.
+Na podstawie uprzednio wybranych liczb, Alice i Bob obliczają wartości, które wymienią miedzy sobą.
 
-Na podstawie uprzednio wybranych liczb, Alice i Bob tworzą liczby, które wymienią miedzy sobą.
+Za pomocą wymienionych miedzy sobą liczb, Alice i Bob w niezależny sposób są w stanie wyliczyć klucz sesyjny (obojgu powinien wyjść ten sam).
 
-W tym przypadku, te liczby to $8$ i $33$ kolejno.
+\subsubsection{Weryfikacja obliczeniowa}
 
-Na podstawie wymienionych miedzy sobą liczb, Alice i Bob w niezależny sposób są w stanie wyliczyć klucz sesyjny (obojgu powinien wyjść ten sam).
+\begin{equation}
+	p = 47, q = 29, a = 16, b = 31 
+\end{equation}
 
-W przypadku tego eksperymentu, uzyskaną wartością była liczba $2$.
+\begin{equation}
+	A = g^a \pmod{p} = 29^{16} \pmod{47} = 8
+\end{equation}
+
+\begin{equation}
+	B = g^b \pmod{p} = 29^{31} \pmod{47} = 33
+\end{equation}
+
+\begin{equation}
+	s_A = B^{a} \pmod{p} = 33^{16} \pmod{47} = 2
+\end{equation}
+
+\begin{equation}
+	s_B = A^{b} \pmod{p} = 8^{31} \pmod{47} = 2
+\end{equation}
 
 \newpage
 
@@ -102,4 +117,6 @@ Wbrew naiwnej intuicji, pomimo różnych parametrów, oboje uzyskują tę samą
 	\end{center}
 	\caption{Wysłanie liczb A i B}
 \end{figure}
+
+\section{Wnioski}
 \end{document}
