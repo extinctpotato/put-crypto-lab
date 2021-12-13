@@ -14,7 +14,7 @@ We should venture on the study of every kind of animal without distaste; \
 for each and all will reveal to us something natural and something beautiful.
 """
 
-def run_all_tests(aes_impl=aesECB):
+def run_all_tests(aes_impl=aesECB, show_mangled=False):
     l.info(f'AES implementation: {str(aes_impl)}')
 
     inputs = [
@@ -64,7 +64,8 @@ def run_all_tests(aes_impl=aesECB):
                 l.info(f"\t\texception: {e}")
                 continue
 
-            l.info(f"\t\tmangled:  {mangled_ciphertext}")
+            if show_mangled:
+                l.info(f"\t\tmangled:  {mangled_ciphertext}")
             l.info(f"\t\tplaintxt: {input_bytes}")
             l.info(f"\t\tdecrypt:  {decrypted_mangled_ciphertext}")
 
