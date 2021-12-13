@@ -21,6 +21,17 @@
 \tableofcontents
 \newpage
 
+\section{Wstęp}
+
+Informacje na temat wykonywanego ćwiczenia:
+
+\begin{itemize}
+	\item \textbf{Język programowania}: Python
+	\item \textbf{Interpreter}: CPython (Python 3.9.9)
+	\item \textbf{Algorytm szyfru blokowego}: AES
+	\item \textbf{Biblioteka}: PyCryptodome
+\end{itemize}
+
 \section{Tryby pracy w PyCryptodome}
 
 Analiza dostępnych trybów pracy została wykonana dla trzech plików o długościach
@@ -57,5 +68,59 @@ zajmują operacje na nim).
 
 Niektóre tryby pracy wykorzystują wektor początkowy (jest to wartość podawana
 podczas wykonywania operacji na pierwszym bloku gdzie nie występuje blok poprzedni).
+
+\newpage
+
+\section{Implementacje trybów pracy}
+
+Funkcje przedstawione poniżej są wykorzystywane do zaszyfrowania pojedynczego
+bloku (\textit{input}) za pomocą klucza (\textit{key}).
+
+\begin{listing}[H]
+	\inputminted[firstline=9,lastline=13]{python}{../aes.py}
+	\caption{Czarna skrzynka do szyfracji}
+\end{listing}
+
+\begin{listing}[H]
+	\inputminted[firstline=15,lastline=19]{python}{../aes.py}
+	\caption{Czarna skrzynka do deszyfracji}
+\end{listing}
+
+Aby podzielić listę na kawałki o jednakowej długości 
+zaimplementowano stosowną funkcję.
+
+\begin{listing}[H]
+	\inputminted[firstline=21,lastline=24]{python}{../aes.py}
+	\caption{Podział listy na kawałki}
+\end{listing}
+
+Dopełnienie wiadomości dokonywane jest przy użyciu funkcji
+\textit{pad} oraz \textit{unpad} dostarczanych przez bibliotekę.
+
+\begin{listing}[H]
+	\inputminted[firstline=26,lastline=28]{python}{../aes.py}
+	\caption{XORowanie list}
+\end{listing}
+
+\subsection{Electronic codebook (ECB)}
+
+\begin{listing}[H]
+	\inputminted[firstline=113,lastline=133]{python}{../aes.py}
+	\caption{Szyfrowanie w trybie ECB}
+\end{listing}
+
+\subsection{Cipher block chaining (CBC)}
+
+\begin{listing}[H]
+	\inputminted[firstline=135,lastline=162]{python}{../aes.py}
+	\caption{Szyfrowanie w trybie CBC}
+\end{listing}
+
+\subsection{Output feedback (OFB)}
+
+\begin{listing}[H]
+	\inputminted[firstline=164,lastline=185]{python}{../aes.py}
+	\caption{Szyfrowanie w trybie CBC}
+\end{listing}
 
 \end{document}
