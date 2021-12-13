@@ -1,0 +1,61 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage[english,polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{minted}
+\usepackage{listings}
+\usepackage{geometry}
+\setlength{\parindent}{0pt}
+
+% Dirty workaround for red boxes appearing around invalid syntax.
+\newenvironment*{dummyenv}{}{}
+\AtBeginEnvironment{dummyenv}{%
+	  \renewcommand{\fcolorbox}[4][]{#4}}
+
+\title{Podstawy kryptografii \\ \large Kryptografia symetryczna} 
+\author{Adam Olech}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Tryby pracy w PyCryptodome}
+
+Analiza dostępnych trybów pracy została wykonana dla trzech plików o długościach
+1, 10 i 100 megabajtów kolejno,
+wygenerowanych w systemie z jądrem Linux przy użyciu programu \textit{dd},
+podając wbudowany w system generator pseudolosowy dostępny jako urządzenie blokowe \textit{/dev/urandom}.
+
+\subsection{Losowy plik o długości 1MB}
+
+\begin{dummyenv}
+	\inputminted[firstline=2,lastline=91]{yaml}{2-enc-dec-time.txt}
+\end{dummyenv}
+
+\subsection{Losowy plik o długości 10MB}
+
+\begin{dummyenv}
+	\inputminted[firstline=92,lastline=181]{yaml}{2-enc-dec-time.txt}
+\end{dummyenv}
+
+\subsection{Losowy plik o długości 100MB}
+
+\begin{dummyenv}
+	\inputminted[firstline=182,lastline=271]{yaml}{2-enc-dec-time.txt}
+\end{dummyenv}
+
+\subsection{Wnioski}
+
+Wbrew intuicji, dla wszystkich plików operacje szyfracji i deszyfracji
+zajmują najdłużej gdy wybrany jest tryb pracy ECB (który z perspektywy implementacji
+wydaje się być najprostszy).
+
+Rozmiar pliku wpływa na czas wykonywanych operacji (im większy plik, tym dłużej
+zajmują operacje na nim).
+
+Niektóre tryby pracy wykorzystują wektor początkowy (jest to wartość podawana
+podczas wykonywania operacji na pierwszym bloku gdzie nie występuje blok poprzedni).
+
+\end{document}

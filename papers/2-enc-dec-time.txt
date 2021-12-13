@@ -1,0 +1,271 @@
+key len: 32
+input file: 1m
+	mode: MODE_CBC
+		object type: <class 'Crypto.Cipher._mode_cbc.CbcMode'>
+		no nonce
+		iv: b'<n\x90\x9e\xfb\xf5\xe6{\xbaND!\xe0\xe5i\xd8'
+		pre-hash:  1a4d691ee86d36f5485d345ff24be4df
+		post-hash: 1a4d691ee86d36f5485d345ff24be4df
+		encryption time: 0.00320227399970463
+		decryption time: 0.002597421999780636
+	mode: MODE_CCM
+		object type: <class 'Crypto.Cipher._mode_ccm.CcmMode'>
+		nonce: b'\x9e+[$\x948a(#\xb8\xf7'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 2.7644000510917976e-05
+		decryption time: 1.8649000594450627e-05
+	mode: MODE_CFB
+		object type: <class 'Crypto.Cipher._mode_cfb.CfbMode'>
+		no nonce
+		iv: b'\xf6\xed\x14\xe8bQ\x80\x928\x04~\xfa+\xc5\xf0p'
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 2.3878999854787253e-05
+		decryption time: 2.1781000214105006e-05
+	mode: MODE_CTR
+		object type: <class 'Crypto.Cipher._mode_ctr.CtrMode'>
+		nonce: b'\x1e\xc9\xa3\xedo\x80U\\'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 5.797999619971961e-06
+		decryption time: 2.3397999939334113e-05
+	mode: MODE_EAX
+		object type: <class 'Crypto.Cipher._mode_eax.EaxMode'>
+		nonce: b'(\xb5<I\x9c\x8fu/\xa9\xc1\xab\xf6~\xdcm\x9b'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 1.4325999472930562e-05
+		decryption time: 1.0976999874401372e-05
+	mode: MODE_ECB
+		object type: <class 'Crypto.Cipher._mode_ecb.EcbMode'>
+		no nonce
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 5.019000127504114e-06
+		decryption time: 2.3548000172013417e-05
+	mode: MODE_GCM
+		object type: <class 'Crypto.Cipher._mode_gcm.GcmMode'>
+		nonce: b' \xf5-\xcf\xac\xe3+8"\x93\x92\xf0\xf5\x89\xc3\x8e'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 1.1736000487871934e-05
+		decryption time: 8.71700012794463e-06
+	mode: MODE_OCB
+		object type: <class 'Crypto.Cipher._mode_ocb.OcbMode'>
+		nonce: b'\xe7\xc0I}Z\xd6\xb5\xbe\x97\xb6\xda\xe46b\xb2'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 2.523299917811528e-05
+		decryption time: 2.3010999939288013e-05
+	mode: MODE_OFB
+		object type: <class 'Crypto.Cipher._mode_ofb.OfbMode'>
+		no nonce
+		iv: b'\x94a\x83\x9c\x9c\x92:"\x18\x9d\xc8\x00h\x06\x815'
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 2.139000025636051e-05
+		decryption time: 2.0339000002422836e-05
+	mode: MODE_OPENPGP
+		object type: <class 'Crypto.Cipher._mode_openpgp.OpenPgpMode'>
+		no nonce
+		iv: b'V<\x85\xeb\x15\x97\x16\xae\xee\xfe\xd5[St@\x9e'
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: fae9465a8994a74e8e93e95e4fe53459
+		encryption time: 6.1230002756929025e-06
+		decryption time: 4.346000423538499e-06
+		hash mismatch!
+	mode: MODE_SIV
+		object type: <class 'Crypto.Cipher._mode_siv.SivMode'>
+		no nonce
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 0.0001529119999759132
+		decryption time: 0.0003067600000576931
+input file: 10m
+	mode: MODE_CBC
+		object type: <class 'Crypto.Cipher._mode_cbc.CbcMode'>
+		no nonce
+		iv: b'\x8c\x9d\x8a\x86\x912\xbd]_!/\x9fLd\xae\x00'
+		pre-hash:  34b3feb1c9a962822f36bfb5bbc388c6
+		post-hash: 34b3feb1c9a962822f36bfb5bbc388c6
+		encryption time: 0.025985869999203715
+		decryption time: 0.026177875000030326
+	mode: MODE_CCM
+		object type: <class 'Crypto.Cipher._mode_ccm.CcmMode'>
+		nonce: b'\xdb\xfeE\xe5\xb2\x0e7\xdbU\xc8\x12'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 2.6231999981973786e-05
+		decryption time: 1.8775000171444844e-05
+	mode: MODE_CFB
+		object type: <class 'Crypto.Cipher._mode_cfb.CfbMode'>
+		no nonce
+		iv: b'\x12\x96O.m\xa4T\xd6\xec\n\x8a\x04\xf1]\xf2\xe3'
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 7.386999641312286e-06
+		decryption time: 4.908999471808784e-06
+	mode: MODE_CTR
+		object type: <class 'Crypto.Cipher._mode_ctr.CtrMode'>
+		nonce: b'[\xe5\xe6\xf1 \xddu\xcd'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 5.491000592883211e-06
+		decryption time: 4.354000338935293e-06
+	mode: MODE_EAX
+		object type: <class 'Crypto.Cipher._mode_eax.EaxMode'>
+		nonce: b'\xe7\xcd\xae\x01Y\xb4\x96v\n;\x82Nt\xc7\xa4\xf0'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 1.3603999832412228e-05
+		decryption time: 1.1347000508976635e-05
+	mode: MODE_ECB
+		object type: <class 'Crypto.Cipher._mode_ecb.EcbMode'>
+		no nonce
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 4.900999556411989e-06
+		decryption time: 3.911000021616928e-06
+	mode: MODE_GCM
+		object type: <class 'Crypto.Cipher._mode_gcm.GcmMode'>
+		nonce: b'\xed\x92\x9f\x12J\x08\x95\xe1B\x8f\xa2+Z,\x00\x88'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 1.1101000382041093e-05
+		decryption time: 8.764999620325398e-06
+	mode: MODE_OCB
+		object type: <class 'Crypto.Cipher._mode_ocb.OcbMode'>
+		nonce: b'\x89\xb7\n\x0f/rs\xefE\x1a}\xbd\x11\xad\x08'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 7.663999895157758e-06
+		decryption time: 9.840000529948156e-06
+	mode: MODE_OFB
+		object type: <class 'Crypto.Cipher._mode_ofb.OfbMode'>
+		no nonce
+		iv: b'Q\xdd\xf3\x15r\xeak]\xf7U\x95\xcdU\x0bR;'
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 6.942000254639424e-06
+		decryption time: 4.847999662160873e-06
+	mode: MODE_OPENPGP
+		object type: <class 'Crypto.Cipher._mode_openpgp.OpenPgpMode'>
+		no nonce
+		iv: b'\x1d3\x02\x11\xa3\x13\xd6\x8a\x9d\x95\x7f\xa2\xec\x1bXi'
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: 4e2a2b365e17292ac6179d97f7d97bfa
+		encryption time: 5.863999831490219e-06
+		decryption time: 4.1500006773276255e-06
+		hash mismatch!
+	mode: MODE_SIV
+		object type: <class 'Crypto.Cipher._mode_siv.SivMode'>
+		no nonce
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 0.00014627600012317998
+		decryption time: 0.00015410499963763868
+input file: 100m
+	mode: MODE_CBC
+		object type: <class 'Crypto.Cipher._mode_cbc.CbcMode'>
+		no nonce
+		iv: b'`\xa9\xf5\xc9\xc0\xff^vm\x84\xfe\xc5*" _'
+		pre-hash:  6948e7754a6c096455a428384e273109
+		post-hash: 6948e7754a6c096455a428384e273109
+		encryption time: 0.2648749730005875
+		decryption time: 0.2667932379999911
+	mode: MODE_CCM
+		object type: <class 'Crypto.Cipher._mode_ccm.CcmMode'>
+		nonce: b'\x0e\ne\xc5\x85g\x00\xbd\x10\xd9\x01'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 2.610100000310922e-05
+		decryption time: 1.9862999579345342e-05
+	mode: MODE_CFB
+		object type: <class 'Crypto.Cipher._mode_cfb.CfbMode'>
+		no nonce
+		iv: b"\x97\x19\x96\x99\x85\xc7'\x7fU\xe6\x98pM\xa7\x992"
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 9.75600050878711e-06
+		decryption time: 5.6230001064250246e-06
+	mode: MODE_CTR
+		object type: <class 'Crypto.Cipher._mode_ctr.CtrMode'>
+		nonce: b'@\x81\xc8\x16\x89\xb7\xe5\xbd'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 6.1860000641900115e-06
+		decryption time: 4.5979995775269344e-06
+	mode: MODE_EAX
+		object type: <class 'Crypto.Cipher._mode_eax.EaxMode'>
+		nonce: b'\xeeR\x0fhgfLN\xb2\x90\xf6:\tS@\x9f'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 1.3505999959306791e-05
+		decryption time: 1.1264999557170086e-05
+	mode: MODE_ECB
+		object type: <class 'Crypto.Cipher._mode_ecb.EcbMode'>
+		no nonce
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 4.925000212097075e-06
+		decryption time: 3.683999239001423e-06
+	mode: MODE_GCM
+		object type: <class 'Crypto.Cipher._mode_gcm.GcmMode'>
+		nonce: b'po\xbe\x8a\xf0\x1e\xa8\x04\xc7\x8d\x18\xe3\xab\xaa\xe3/'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 1.1348000043653883e-05
+		decryption time: 9.045000297192018e-06
+	mode: MODE_OCB
+		object type: <class 'Crypto.Cipher._mode_ocb.OcbMode'>
+		nonce: b'\xed*\x94\x8f\xde\xb4v\xef\xcf:B:\x0cT|'
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 8.04799947218271e-06
+		decryption time: 5.981999493087642e-06
+	mode: MODE_OFB
+		object type: <class 'Crypto.Cipher._mode_ofb.OfbMode'>
+		no nonce
+		iv: b'\x84\x0bg\xd0E\xc1\xe3\xb8kZ\xbd{#\x83\xc0)'
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 6.2399994931183755e-06
+		decryption time: 4.472999535209965e-06
+	mode: MODE_OPENPGP
+		object type: <class 'Crypto.Cipher._mode_openpgp.OpenPgpMode'>
+		no nonce
+		iv: b'l\xba\xf3!!WcB;\x869\xda\x13\xcd\xedf'
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: b1cc219fdbbeb34bd9026a0b18b62399
+		encryption time: 5.648000296787359e-06
+		decryption time: 4.196999725536443e-06
+		hash mismatch!
+	mode: MODE_SIV
+		object type: <class 'Crypto.Cipher._mode_siv.SivMode'>
+		no nonce
+		no iv
+		pre-hash:  d41d8cd98f00b204e9800998ecf8427e
+		post-hash: d41d8cd98f00b204e9800998ecf8427e
+		encryption time: 0.00014245400052459445
+		decryption time: 0.00014798200027144048
