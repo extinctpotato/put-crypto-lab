@@ -1,0 +1,76 @@
+AES implementation: <class 'aes.aesECB'>
+Input 0
+		1/4
+	change_random_byte_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'\xe2L\xac\x1e\xf2\xff\x8f\x17!T\xb1\x1c7\xdf\x95haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10'
+	duplicate_block_append_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10aaaaaaaaaaaaaaaa'
+	duplicate_block_replace_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10'
+	duplicate_block_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10'
+	incomplete_block_test:
+		exception: input must be at least 16 bytes long!
+	remove_block_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10'
+	shuffle_bytes_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'zs\xc9\x1f\x95\xa6V\xaaf\xe1.\xf9\xcf\x0b\x07\raaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10'
+	swap_block_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10\x10'
+Input 1
+		3/5
+	change_random_byte_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdef\xd6\x02?\xc9\x9a\xe1\x19\x91C(\xad>[\x7f\x01\xbewxyzabcdefghijklmnopqrstuvwxyz\x02\x02'
+	duplicate_block_append_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz\x02\x02ghijklmnopqrstuv'
+	duplicate_block_replace_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvghijklmnopqrstuvmnopqrstuvwxyz\x02\x02'
+	duplicate_block_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz\x02\x02'
+	incomplete_block_test:
+		exception: input must be at least 16 bytes long!
+	remove_block_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdefwxyzabcdefghijklmnopqrstuvwxyz\x02\x02'
+	shuffle_bytes_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdef\xed\xfb\xc7\xe3\xb7>\x94\xd5Y\x8f\xb5\x80$\x17\xa5\x0fwxyzabcdefghijklmnopqrstuvwxyz\x02\x02'
+	swap_block_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdefwxyzabcdefghijklghijklmnopqrstuvmnopqrstuvwxyz\x02\x02'
+Input 2
+		5/10
+	change_random_byte_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study of every kind of animal without d*\x9bh\xd6\xca\x12k\xdb\xce5d\xc7~\x03b\xach and all will reveal to us something natural and something beautiful.\n\t\t\t\t\t\t\t\t\t'
+	duplicate_block_append_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n\t\t\t\t\t\t\t\t\tistaste; for eac'
+	duplicate_block_replace_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study of every kind of animal without distaste; for eacistaste; for eaceveal to us something natural and something beautiful.\n\t\t\t\t\t\t\t\t\t'
+	duplicate_block_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study of every kind of animal without distaste; for eacistaste; for each and all will reveal to us something natural and something beautiful.\n\t\t\t\t\t\t\t\t\t'
+	incomplete_block_test:
+		exception: input must be at least 16 bytes long!
+	remove_block_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study of every kind of animal without dh and all will reveal to us something natural and something beautiful.\n\t\t\t\t\t\t\t\t\t'
+	shuffle_bytes_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study of every kind of animal without d\xaa\xe9\xd2\xd2\\O\xccD\xff\x16\xb5F\xfe\x80\xd5jh and all will reveal to us something natural and something beautiful.\n\t\t\t\t\t\t\t\t\t'
+	swap_block_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study of every kind of animal without dh and all will ristaste; for eaceveal to us something natural and something beautiful.\n\t\t\t\t\t\t\t\t\t'

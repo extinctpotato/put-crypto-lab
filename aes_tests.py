@@ -47,7 +47,7 @@ def run_all_tests(aes_impl=aesECB, show_mangled=False):
             )
 
         for t in tests:
-            l.info(f"\t{t}")
+            l.info(f"\t{t}:")
 
             # Get test function by textual name.
             method_to_call = getattr(aes_mangle_tests, t)

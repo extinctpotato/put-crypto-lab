@@ -1,0 +1,79 @@
+AES implementation: <class 'aes.aesOFB'>
+Input 0
+		1/3
+	change_random_byte_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'aaFaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+	duplicate_block_append_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\xd4\x89\xfdCn\xff\x1b\x8f\xfe8\xca\x86w\x11^\xfd'
+	duplicate_block_replace_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'aaaaaaaaaaaaaaaa\xa9I\xde\xb99\xb9\xef~c\x8c\xb1\xfc\x11\x8e\xf2\xf5aaaaaaaaaaaaaaaa'
+	duplicate_block_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'aaaaaaaaaaaaaaaa\xa9I\xde\xb99\xb9\xef~c\x8c\xb1\xfc\x11\x8e\xf2\xf5a\xfbF{\x82\x9e\xf7\xa8\xb7\x8d}\xfbU\x90\x1b|\x1c;e\x81\xd5\xd8\x03Y*9\x06\x813\x0f\xb7t'
+	incomplete_block_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'aac\xff\xe2\xb1\xdd\xb9\xf6v\xa4\x1cNC\x1c^\xe7\x84\x04\x7fb\xe7L\xa4\x19K\xe9\xf1\xd1?\x1b\xca}99\x86~\x8e\x13\xbb#\xbbo_\x14\xb4|\xac'
+	remove_block_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'\xa9I\xde\xb99\xb9\xef~c\x8c\xb1\xfc\x11\x8e\xf2\xf5a\xfbF{\x82\x9e\xf7\xa8\xb7\x8d}\xfbU\x90\x1b|'
+	shuffle_bytes_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'^\xaf~\x8d\xe9\r=\xb9)\xc3\xd6@\xf2\xe1\xfd\xf0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+	swap_block_test:
+		plaintxt: b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+		decrypt:  b'\xa9I\xde\xb99\xb9\xef~c\x8c\xb1\xfc\x11\x8e\xf2\xf5\xa9I\xde\xb99\xb9\xef~c\x8c\xb1\xfc\x11\x8e\xf2\xf5aaaaaaaaaaaaaaaa'
+Input 1
+		4/5
+	change_random_byte_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzaAcdefghijklmnopqrstuvwxyz\x02\x02'
+	duplicate_block_append_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz\x02\x02\xfd\xaf\xfb\xa6\xee\x01\x1dz\xea7\xe5/\xec\x81\x99\x90'
+	duplicate_block_replace_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl\xd7\xcf\xa9\x11\xefw/\xd4\xf8\tn\xec!]\xd7\xa5'
+	duplicate_block_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijkl\xd7\xcf\xa9\x11\xefw/\xd4\xf8\tn\xec!]\xd7\xa5G\x0e=\xc7p\x04A\xdagH\xfc\xbb\xb4\xa6L7'
+	incomplete_block_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyza\xe3+\x82g\x134\xdf\xdb|Ww_h\x05j\x0f\xaa\xc7\xbf\x85e\xa9\x03\xb4\x9eL\xca'
+	remove_block_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv\xcd\xd9\xbf\x1b\xffg?\xc4\xe8\x19~\xfc1M\xbe\xcb'
+	shuffle_bytes_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv;\x19\x08q\x84:c\xb5Jo\x12\xcfP\x81\\Fmnopqrstuvwxyz\x02\x02'
+	swap_block_test:
+		plaintxt: b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz'
+		decrypt:  b'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuv\xcd\xd9\xbf\x1b\xffg?\xc4\xe8\x19~\xfc1M\xbe\xcb\xd7\xcf\xa9\x11\xefw/\xd4\xf8\tn\xec!]\xd7\xa5'
+Input 2
+		3/10
+	change_random_byte_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study of every kind o\x1a animal without distaste; for each and all will reveal to us something natural and something beautiful.\n\t\t\t\t\t\t\t\t\t'
+	duplicate_block_append_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n\t\t\t\t\t\t\t\t\t\x03\x03\xbf<\xd4\xab@\xf6rejrX6M\x19'
+	duplicate_block_replace_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study of every kind of \x12\x88\x8fD&\x9a2\x8b6\xdaU\xcc\xb2~\x89\xb1istaste; for each and all will reveal to us something natural and something beautiful.\n\t\t\t\t\t\t\t\t\t'
+	duplicate_block_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study of every kind of \x12\x88\x8fD&\x9a2\x8b6\xdaU\xcc\xb2~\x89\xb1\x97\xa0\xe5\xb8\x1a\x19fe\xf8:\x90\x03\x010\xe9\x04\xe0j;V.L\x9b\xe8\x8b"\xfc\xfc\xb3{~\xd9D\xa2\x8f\x02\xec>\xe7DW\x04\x905\xe6|w\xa3\xe3:(i\xec\xafE\x82,\xc3\xc7e\xb7\xb6\x9d\xf7\x9cZ\xe5+5\xf0g\xa6\xc3?0\x8f~4\xf8?\x80z\x8d\xf4hsP\x0f\xd4O\xbf\x0e\xda\x94\x1c;\xbc\x93DU\xe7\x05Z\xd0JE\x94\x8c\xe07X\''
+	incomplete_block_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study of every kind o\xc1\n\x9e\x97\x14\xb3\x90\xec\xbc\x17np\xc4\xfc\xe5\xd4\xfbe\xbb\xc8A\x0f\x86\x9a\xa4\xdd\xa3\xc1M\xb1\xc4\x18U\x8dx\x8b6r\xb7X\xde\xe9\n\x0eK\xe0@X\xe1\x16\x80\xe3\xbb\x9e!\xd5s\xb6@\xc9\xb9)\xd9RpPT\xee\xf1\x1d.q\xa1\x03\xfa\xca\t\xb7\x8bw\x19:\xc6J9\x00\xe9\xb2fn\x1c\xd7\xe4E\xc8\xfa\xca\x9f1\xfbF\x9f\xb1\xfeD\xd4\xe7@;\xb8\xed\x1e\x85\xee'
+	remove_block_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study o\x15\xc6\x83_"\x84k\xdc4\xc7S\xc7\xe7e\xcf\xf5\x9f\xbd\xf8\xb4\x08\x01#)\xb1(\x97\x1eT!\xa8\x03\xe19.Y9\x18\x9f\xbf\xc7d\xe4\xe7\xffr?\xc8I\xf4\x8b\r\xe4>\xf2G\x1bQ\x94|\xf9\x7f:\xb4\xf2$$f\xe7\xaf_\x8cx\xc3\xc6$\xa8\xf9\x91\xfc\x8c\x12\xff*?\xb5}\xaf\xde$%\xcepq\xf8$\x903\x98\xeei8.n\xb4(\xd1\'\xb1\xf8tG'
+	shuffle_bytes_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study ob e\x90A]]\xc6o\xcc\xf9j}2I\x1canimal without distaste; for each and all will reveal to us something natural and something beautiful.\n\t\t\t\t\t\t\t\t\t'
+	swap_block_test:
+		plaintxt: b'We should venture on the study of every kind of animal without distaste; for each and all will reveal to us something natural and something beautiful.\n'
+		decrypt:  b'We should venture on the study o\x15\xc6\x83_"\x84k\xdc4\xc7S\xc7\xe7e\xcf\xf5\x12\x88\x8fD&\x9a2\x8b6\xdaU\xcc\xb2~\x89\xb1istaste; for each and all will reveal to us something natural and something beautiful.\n\t\t\t\t\t\t\t\t\t'

@@ -71,7 +71,7 @@ podczas wykonywania operacji na pierwszym bloku gdzie nie występuje blok poprze
 
 \newpage
 
-\section{Implementacje trybów pracy}
+\section{Tryby pracy szyfrów blokowych}
 
 Funkcje przedstawione poniżej są wykorzystywane do zaszyfrowania pojedynczego
 bloku (\textit{input}) za pomocą klucza (\textit{key}).
@@ -102,25 +102,95 @@ Dopełnienie wiadomości dokonywane jest przy użyciu funkcji
 	\caption{XORowanie list}
 \end{listing}
 
-\subsection{Electronic codebook (ECB)}
+\subsection{Implementacje}
+
+\subsubsection{Electronic codebook (ECB)}
 
 \begin{listing}[H]
 	\inputminted[firstline=113,lastline=133]{python}{../aes.py}
 	\caption{Szyfrowanie w trybie ECB}
 \end{listing}
 
-\subsection{Cipher block chaining (CBC)}
+\subsubsection{Cipher block chaining (CBC)}
 
 \begin{listing}[H]
 	\inputminted[firstline=135,lastline=162]{python}{../aes.py}
 	\caption{Szyfrowanie w trybie CBC}
 \end{listing}
 
-\subsection{Output feedback (OFB)}
+\subsubsection{Output feedback (OFB)}
 
 \begin{listing}[H]
 	\inputminted[firstline=164,lastline=185]{python}{../aes.py}
-	\caption{Szyfrowanie w trybie CBC}
 \end{listing}
 
+\subsection{Weryfikacja poprawności działania}
+
+Aby sprawdzić, czy tekst jawny po zaszfrowaniu i odszyfrowaniu jest niezmieniony,
+można posłużyć się trzema funkcjami głownym entrypoincie
+projektu (\textit{\detokenize{python3 cli.py aes_MODE_enc_test}}).
+
+\begin{listing}[H]
+	\inputminted[firstline=12,lastline=15]{python}{../aes_tests.py}
+	\caption{Użyty tekst jawny}
+\end{listing}
+
+\section{Modyfikacja wiadomości tajnych}
+
+\subsection{Opis modyfikacji}
+
+Zaimplementowano funkcje wykonujące następujące operacje na blokach
+wiadomości tajnej:
+
+\begin{itemize}
+	\item usunięcie bloku
+	\item duplikacja bloku
+	\item zamiana bloków miejscami (swap)
+	\item zmiana jednego bajtu w bloku
+	\item przetasowanie bajtów w bloku (shuffle)
+	\item usunięcie fragmentu bloku
+\end{itemize}
+
+Wykorzystywane są trzy testowe ciągi tekstu jawnego.
+
+\begin{listing}[H]
+	\inputminted[firstline=20,lastline=24]{python}{../aes_tests.py}
+	\caption{Testowe dane wejściowe}
+\end{listing}
+
+\newpage
+
+\subsection{Implementacja manglera}
+
+\inputminted[firstline=72,lastline=165]{python}{../aes_tests.py}
+
+\subsection{Rezultat}
+
+\subsubsection{ECB}
+
+\begin{dummyenv}
+	\inputminted[breaklines,firstline=1,lastline=51]{yaml}{2-mangled-ecb.txt}
+\end{dummyenv}
+
+\subsubsection{CBC}
+
+\begin{dummyenv}
+	\inputminted[breaklines,firstline=1,lastline=51]{yaml}{2-mangled-cbc.txt}
+\end{dummyenv}
+
+\subsubsection{OFB}
+
+\begin{dummyenv}
+	\inputminted[breaklines,firstline=1,lastline=51]{yaml}{2-mangled-ofb.txt}
+\end{dummyenv}
+
+\subsection{Wnioski}
+
+Zamiana losowych bajtów dla wszystkich trybów z wyjątkiem OFB powoduje
+znaczne zniekształcenie bloku.
+
+Najprostszy z trybów, ECB, wydaje się być najmniej podatny na modyfikacje.
+
+Wiadomości uzyskane w trybie CBC zdają się być bardziej zniekształcone niż te
+pochodzące z trybu OFB.
 \end{document}
