@@ -133,4 +133,56 @@ Ostatecznie:
 	\caption{Wyliczenie modularnej odwrotności}
 \end{listing}
 
+\section{Szyfrowanie wiadomości}
+
+\subsection{Opis metody}
+Operacje szyfracji i deszyfracji kolejno odbywają się przez
+wyliczenie reszty z dzielenia
+podniesionego do potęgi liczby jawnej lub zaszyfrowanej do
+liczby $e$ lub $d$ 
+przez liczbę $d$.
+
+\begin{listing}[H]
+	\inputminted[firstline=75,lastline=79]{python}{../rsa.py}
+	\caption{Implementacja RSA}
+\end{listing}
+
+\newpage
+
+\subsection{Szyfrowanie ciągów}
+
+Z racji, że algorytm RSA działa na liczbach całkowitoliczbowych,
+szyfrowanie ciągów wymaga zamiany takiego ciągu na odpowiednią reprezentację
+liczbową.
+\\
+
+Biblioteka standardowa w Pythonie 
+pozwala na zamianę ciągu znaków na typ \textit{int}.
+
+\begin{listing}[H]
+	\inputminted[]{python}{3-bytes-example.py}
+	\caption{Zamiana ciągu znaków na liczbę}
+\end{listing}
+
+Istotnym ograniczeniem jest maksymalna wartość liczby jawnej -- nie może
+ona być większa od liczby $n$.
+\\
+
+Liczbę zatem należy zamienić
+na wiele liczb w $n$-liczbowym systemie liczbowym.
+Dzięki temu, maksymalną wartością każdej takiej liczby będzie $n$.
+
+\begin{listing}[H]
+	\inputminted[firstline=7,lastline=17]{python}{../rsa.py}
+	\caption{Konwersja systemu liczbowego}
+\end{listing}
+
+Przy deszyfracji, operację należy odwrócić poprzez konwersję listy
+liczb na system dziesiętny.
+
+\begin{listing}[H]
+	\inputminted[firstline=19,lastline=26]{python}{../rsa.py}
+	\caption{Konwersja systemu liczbowego}
+\end{listing}
+
 \end{document}
