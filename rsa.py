@@ -26,8 +26,8 @@ def base_to_int(n, b):
     return i
 
 def modular_multiplicative_inverse(a, m):
-    _, t2, _ = xea(a, m)
-    return t2 % m
+    _, s2, _ = xea(a, m)
+    return s2 % m
 
 def xea(a, b, s1=1, s2=0, t1=0, t2=1):
     q = a // b
