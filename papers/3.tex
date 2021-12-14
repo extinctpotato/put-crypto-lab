@@ -182,7 +182,30 @@ liczb na system dziesiętny.
 
 \begin{listing}[H]
 	\inputminted[firstline=19,lastline=26]{python}{../rsa.py}
-	\caption{Konwersja systemu liczbowego}
+	\caption{Konwersja z systemu $n$-liczbowego na dziesiętny}
+\end{listing}
+
+\subsubsection{Przykład}
+
+Zaszyfrowano 50 pierwszych znaków pewnego cytatu Arystotelesa.
+
+\begin{listing}[H]
+	\inputminted[firstline=12,lastline=15]{python}{../aes_tests.py}
+	\caption{Tekst jawny}
+\end{listing}
+
+Funkcje opisane w poprzedniej sekcji zostały użyte w następujący sposób:
+
+\begin{listing}[H]
+	\inputminted[firstline=54,lastline=59]{python}{../cli.py}
+	\caption{Tekst jawny}
+\end{listing}
+
+Po uruchomieniu funkcji otrzymujemy następujący rezultat:
+
+\begin{listing}[H]
+	\inputminted{yaml}{3-rsa-enc-test.txt}
+	\caption{Wynik działania}
 \end{listing}
 
 \end{document}
