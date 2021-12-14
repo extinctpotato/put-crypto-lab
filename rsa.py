@@ -51,11 +51,11 @@ def gcd(a, b):
 
     return gcd(b, remainder)
 
-def generate_rsa_keypair():
+def generate_rsa_keypair(p=None, q=None):
     # Prime numbers 'p' and 'q' must be irrecoverably
     # discarded after performing all calculations.
-    p = randprime(0, 1000)
-    q = randprime(0, 1000)
+    p = p or randprime(0, 1000)
+    q = q or randprime(0, 1000)
 
     # The 'n' product is used both for private and public key.
     n = p*q

@@ -250,8 +250,10 @@ def get_parser():
             )
 
     generate_rsa_keypair_arg = subparsers.add_parser("generate_rsa_keypair")
+    generate_rsa_keypair_arg.add_argument("--p", type=int)
+    generate_rsa_keypair_arg.add_argument("--q", type=int)
     generate_rsa_keypair_arg.set_defaults(
-            func=lambda arg: l.info(generate_rsa_keypair())
+            func=lambda arg: l.info(generate_rsa_keypair(arg.p, arg.q))
             )
 
     return parser
