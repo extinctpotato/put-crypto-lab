@@ -55,9 +55,56 @@ funkcję implementującą algorytm generujący trzy składniki pary kluczy.
 \end{listing}
 
 Funkcja przyjmuje na wejściu liczby $p$ i $q$, choć są to parametry opcjonalne.
+\\
 
 W przypadku wywołania funkcji bez parametrów, zostaną użyte losowe liczby
 pierwsze uzyskane przy pomocy funkcji 
 \textit{randprime} z biblioteki \textbf{\href{https://www.sympy.org}{Sympy}}.
+
+\newpage
+
+W wyniku działania funkcji uzyskano następujące liczby:
+
+\begin{itemize}
+	\item \textbf{e}: 1749151
+	\item \textbf{d}: 11236
+	\item \textbf{n}: 2037143
+\end{itemize}
+
+Para liczb $e$ oraz $n$ jest kluczem publicznym, a $d$ oraz $n$ kluczem prywatnym.
+
+\subsubsection{Wyznaczenie wartości $e$}
+
+Aby wyznaczyć wartość $e$, należy najpierw wyznaczyć tocjent (ang. \textit{totient}).
+\\
+
+Można to zrobić używając funkcji Carmichaela.
+\begin{equation}
+	\lambda (pq) = lcm(p-1, q-1)
+\end{equation}
+
+Alternatywą jest użycie funkcji Eulera
+\begin{equation}
+	\varphi (pq) = (p-q)(q-1)
+\end{equation}
+
+W przypadku tej pierwszej uzyskamy
+najmniejszy wspólny mnożnik liczb $p-1$ oraz $q-1$,
+\\
+
+W przypadku, w którym nie dbamy, by była to liczba najmniejsza
+\footnote{Mniejsza liczba zapewnia mniej kosztowną obliczeniowo operację
+szyfrowania.},
+dopuszczalne jest wykorzystanie metody Eulera (która da wielokrotność
+wartości uzyskanej funkcją Carmichaela).
+\\
+
+Po wyznaczeniu tocjentu, wyznaczamy $e$ taką, która spełnia poniższe warunki:
+
+\begin{itemize}
+	\item liczba $e$ jest pierwsza.
+	\item liczba $e$ jest większa od zera i mniejsza od tocjentu.
+	\item największy wspólny dzielnik liczby $e$ i tocjentu nie wynosi $1$.
+\end{itemize}
 
 \end{document}
