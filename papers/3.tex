@@ -1,0 +1,63 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, total={6in, 10in}]{geometry}
+\usepackage[english,polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{minted}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{colorlinks=false}
+\setlength{\parindent}{0pt}
+
+% Dirty workaround for red boxes appearing around invalid syntax.
+\newenvironment*{dummyenv}{}{}
+\AtBeginEnvironment{dummyenv}{%
+	  \renewcommand{\fcolorbox}[4][]{#4}}
+
+\title{Podstawy kryptografii \\ \large Kryptografia asymetryczna} 
+\author{Adam Olech}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Wstęp}
+
+Informacje na temat wykonywanego ćwiczenia:
+
+\begin{itemize}
+	\item \textbf{Język programowania}: Python
+	\item \textbf{Interpreter}: CPython (Python 3.9.9)
+\end{itemize}
+
+Kod dostępny jest w repozytorium pod adresem \url{https://github.com/extinctpotato/put-crypto-lab}
+
+\section{Szyfrowanie przy użyciu algorytmu RSA}
+
+\subsection{Generacja pary kluczy}
+
+Aby wygenerować parę kluczy (publiczny i prywatny), 
+przygotowano następujące liczby pierwsze:
+
+\begin{itemize}
+	\item \textbf{p}: 1013
+	\item \textbf{q}: 2011
+\end{itemize}
+
+Wspomniane wyżej liczby zostały podane jako wejście na
+funkcję implementującą algorytm generujący trzy składniki pary kluczy.
+
+\begin{listing}[H]
+	\inputminted[firstline=54,lastline=73]{python}{../rsa.py}
+	\caption{Implementacja generatora pary kluczy}
+\end{listing}
+
+Funkcja przyjmuje na wejściu liczby $p$ i $q$, choć są to parametry opcjonalne.
+
+W przypadku wywołania funkcji bez parametrów, zostaną użyte losowe liczby
+pierwsze uzyskane przy pomocy funkcji 
+\textit{randprime} z biblioteki \textbf{\href{https://www.sympy.org}{Sympy}}.
+
+\end{document}
