@@ -107,4 +107,30 @@ Po wyznaczeniu tocjentu, wyznaczamy $e$ taką, która spełnia poniższe warunki
 	\item największy wspólny dzielnik liczby $e$ i tocjentu nie wynosi $1$.
 \end{itemize}
 
+\newpage
+
+\subsubsection{Wyznaczenie wartości $d$}
+
+Aby wyznaczyć $d$, należy znaleźć taką liczbę,
+która jest modularną odwrotnością multiplikatywną
+reszty z dzielenia $e$ i tocjentu.
+
+\begin{equation}
+	d \equiv e^{{-1}} \pmod{\lambda (n)}
+\end{equation}
+
+Do tego celu można zastosować rozszerzony algorym Euklidesa.
+
+\begin{listing}[H]
+	\inputminted[firstline=32,lastline=42]{python}{../rsa.py}
+	\caption{Implementacja rozszerzonego algorytmu Euklidesa}
+\end{listing}
+
+Ostatecznie:
+
+\begin{listing}[H]
+	\inputminted[firstline=28,lastline=30]{python}{../rsa.py}
+	\caption{Wyliczenie modularnej odwrotności}
+\end{listing}
+
 \end{document}
