@@ -34,6 +34,38 @@ Informacje na temat wykonywanego ćwiczenia:
 
 Kod dostępny jest w repozytorium pod adresem \url{https://github.com/extinctpotato/put-crypto-lab}
 
+\subsection{Maksymalna wartość liczbowa}
+
+Wykorzystywany interpreter nie narzuca żadnych ograniczeń jeśli chodzi
+o maksymalną wartość typu \textit{integer}, a więc teoretycznie
+możliwe jest wykorzystywanie dowolnej wielkości liczb pierwszych tak długo,
+jak mieszczą się w pamięci komputera.
+
+\begin{listing}[H]
+	\inputminted[breakafter=_,breaklines,tabsize=2]{python}{3-python-bigint.txt }
+	\caption{Wyjście interpretera}
+\end{listing}
+
+\section{Krótki opis RSA}
+
+RSA (Rivest-Shamir-Adleman) jest publicznym systemem kryptograficznym
+opracowanym w latach '70 przez badaczy na Massachusetts Institute of Technology.
+\\
+
+W publicznym systemie kryptograficznym klucz szyfrujący jest publiczny
+i jest różny od klucza deszyfrującego, który jest ściśle tajny.
+
+Użytkownik algorytmu tworzy i ujawnia klucz publiczny który bazuje na dwóch
+dużych liczbach pierwszych.
+\\
+
+Bezpieczeństwo RSA polega na praktycznej trudności
+faktoryzacji dwóch dużych liczb pierwszych.
+Obecnie nie istnieje żaden znany sposób by pokonać ten system,
+pod warunkiem że zostanie użyty odpowiednio duży klucz.
+
+\newpage
+
 \section{Szyfrowanie przy użyciu algorytmu RSA}
 
 \subsection{Generacja pary kluczy}
@@ -60,8 +92,6 @@ Funkcja przyjmuje na wejściu liczby $p$ i $q$, choć są to parametry opcjonal
 W przypadku wywołania funkcji bez parametrów, zostaną użyte losowe liczby
 pierwsze uzyskane przy pomocy funkcji 
 \textit{randprime} z biblioteki \textbf{\href{https://www.sympy.org}{Sympy}}.
-
-\newpage
 
 W wyniku działania funkcji uzyskano następujące liczby:
 
