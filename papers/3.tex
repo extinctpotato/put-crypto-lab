@@ -238,4 +238,75 @@ Po uruchomieniu funkcji otrzymujemy następujący rezultat:
 	\caption{Wynik działania}
 \end{listing}
 
+\newpage
+
+\section{Podpis cyfrowy}
+
+\subsection{Zasada działania}
+
+Wiadomość jawną można zaszyfrować zarówno za pomocą klucza publicznego
+jak i prywatnego.
+\\
+
+Zaszyfrowanie za pomocą klucza publicznego odbiorcy gwarantuje,
+że tylko odbiorca, czyli posiadacz klucza prywatnego,
+jest w stanie odszyfrować tę wiadomość.
+\\
+
+Zaszyfrowanie zaś za pomocą własnego klucza prywatnego powoduje,
+że każdy za pomocą jawnego klucza publicznego jest w stanie
+odszyfrować wiadomość.
+Z racji, że z założenia klucz prywatny jest tajny,
+możliwość udowodnienia, że za jego pomocą dana wiadomość została zaszyfrowana
+umożliwia poświadczenie, że tak w rzeczywistości było.
+
+\subsection{Podpisanie wiadomości przy użyciu własnej implementacji RSA}
+
+Implementacja testu wykonuje następujące kroki:
+
+\begin{itemize}
+	\item generacja dwóch par kluczy publicznych (para $A$ i para $B$).
+	\item zaszyfrowanie wiadomości kluczami prywatnymi.
+	\item odszyfrowanie wiadomości kluczami publicznymi.
+	\item próba odszyfrowania wiadomości zaszyfrowanej kluczem $A$ kluczem $B$.
+	\item próba odszyfrowania wiadomości zaszyfrowanej kluczem $B$ kluczem $A$..
+\end{itemize}
+
+\begin{listing}[H]
+	\inputminted{yaml}{3-sign.txt}
+	\caption{Wynik działania}
+\end{listing}
+
+\newpage
+
+\section{Wnioski}
+
+\subsection{Trudne w realizacji elementy algorytmu}
+
+Podczas implementacji algorytmu RSA, trudność może sprawić
+poprawne zrozumienie oraz zaimplementowanie algorytmu
+służącego do wyznaczenia modularnej odwrotności multiplikatywnej.
+
+\subsection{Czynniki wpływające na bezpieczeństwo}
+
+Aby zapewnić maksymalne bezpieczeństwo, należy użyć
+dużych liczb pierwszych $p$ i $q$, których iloczyn da
+odpowiednio duże $n$.
+\\
+
+Jak dotąd nie opracowano jeszcze żadnego algorytmu wielomianowego,
+który byłby w stanie dokonać faktoryzacji tych liczb.
+Nie udowodniono jednak, jakoby miało to być niemożliwe.
+\\
+
+Obecnie rekomendowanym rozmiarem modułu $n$ jest 2048 bitów.
+Klucze o rozmiarze poniżej 300 bitów da się złamać
+komputerami z półki sklepowej.
+
+\subsection{Dwa zastosowania kryptografii asymetrycznej}
+
+Kryptografia asymetryczna pozwala na zarówno bezpieczne szyfrowanie wiadomości,
+jak i na weryfikację pochodzenia wiadomości przy użyciu mechanizmu podpisu
+cyfrowego.
+
 \end{document}
