@@ -2,7 +2,7 @@ import sys, argparse, logging
 from Crypto.Util.Padding import unpad
 from Crypto.Cipher import AES
 # In-tree modules
-import aes, bbs_generator
+import aes, bbs_generator, rsa
 from fips import run_all_tests as run_all_fips_tests
 from aes import (
         test_lib as aes_test_lib, 
@@ -242,6 +242,22 @@ def get_parser():
     rsa_sign_test_arg = subparsers.add_parser("rsa_sign_test")
     rsa_sign_test_arg.add_argument("--plaintext", type=str, default=QUOTE[:20])
     rsa_sign_test_arg.set_defaults(func=rsa_sign_test_func)
+
+    rsa_enc_int_arg = subparsers.add_parser("rsa_enc_int")
+    rsa_enc_int_arg.add_argument("--m", type=int)
+    rsa_enc_int_arg.add_argument("--e", type=int)
+    rsa_enc_int_arg.add_argument("--n", type=int)
+    rsa_enc_int_arg.set_defaults(
+            func=lambda arg: l.info(rsa.rsa_encrypt(arg.m, arg.e, arg.n))
+            )
+
+    rsa_dec_int_arg = subparsers.add_parser("rsa_dec_int")
+    rsa_dec_int_arg.add_argument("--c", type=int)
+    rsa_dec_int_arg.add_argument("--d", type=int)
+    rsa_dec_int_arg.add_argument("--n", type=int)
+    rsa_dec_int_arg.set_defaults(
+            func=lambda arg: l.info(rsa.rsa_decrypt(arg.c, arg.d, arg.n))
+            )
 
     aes_mangle_tests_arg = subparsers.add_parser("aes_mangle_tests")
     aes_mangle_tests_arg.add_argument("--mode", type=str, default="aesCBC")
